@@ -25,6 +25,7 @@ bool CollaborationSession::isCollabEnabled() const {
 void CollaborationSession::onEnterEditor() {
     m_inEditor = true;
     m_discoveryTimer = 0.f;
+    m_localUsername = GJAccountManager::get()->m_username;
     if (isCollabEnabled()) {
         NetworkManager::get().startUdpDiscovery(54321); // Default discovery port
     }
@@ -52,7 +53,7 @@ void CollaborationSession::update(float dt) {
         matjson::Value payload = matjson::Value::object();
         payload["type"] = static_cast<int>(Packets::MessageType::DiscoveryRequest);
         payload["platform"] = static_cast<int>(Packets::getCurrentPlatform());
-        payload["user"] = GJAccountManager::get()->m_username;
+        payload["user"] = m_localUsername;
 
         NetworkManager::get().sendUdpBroadcast(payload.dump(matjson::NO_INDENTATION), 54321);
 
@@ -72,6 +73,7 @@ void CollaborationSession::update(float dt) {
 }
 
 void CollaborationSession::handleUdpMessage(const std::string& ip, const std::string& message) {
+    if (message.empty() || message.length() > 1024) return;
     // Basic verification and platform check
     try {
         auto parseResult = matjson::parse(message);
@@ -85,7 +87,7 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
         int type = parsed["type"].asInt().unwrapOr(-1);
         if (type == static_cast<int>(Packets::MessageType::DiscoveryRequest)) {
             // Someone is broadcasting. Add them to the UI list if they aren't us.
-            if (username == GJAccountManager::get()->m_username) return;
+            if (username == m_localUsername) return;
 
             std::lock_guard<std::mutex> lock(m_usersMutex);
             auto now = std::chrono::duration_cast<std::chrono::seconds>(

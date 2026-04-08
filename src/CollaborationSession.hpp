@@ -37,6 +37,7 @@ private:
     
     bool m_inEditor = false;
     float m_discoveryTimer = 0.f;
+    std::string m_localUsername;
     std::vector<DiscoveredUser> m_discoveredUsers;
     std::mutex m_usersMutex;
 };
