@@ -4,7 +4,7 @@ using namespace geode::prelude;
 
 UserDiscoveryPopup* UserDiscoveryPopup::create() {
     auto ret = new UserDiscoveryPopup();
-    if (ret && ret->init(150)) {
+    if (ret && ret->init()) {
         ret->autorelease();
         return ret;
     }
@@ -12,11 +12,18 @@ UserDiscoveryPopup* UserDiscoveryPopup::create() {
     return nullptr;
 }
 
-bool UserDiscoveryPopup::init(int priority) {
-    if (!FLAlertLayer::init(priority)) return false;
+bool UserDiscoveryPopup::init() {
+    if (!CCLayer::init()) return false;
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     
+    // Create a darken background layer manually
+    auto darken = CCLayerColor::create({ 0, 0, 0, 150 });
+    this->addChild(darken);
+
+    m_mainLayer = CCLayer::create();
+    this->addChild(m_mainLayer);
+
     // Create background (standard GD popup size)
     auto bg = CCScale9Sprite::create("GJ_square01.png", { 0, 0, 80, 80 });
     bg->setContentSize({ 300.f, 220.f });
@@ -28,7 +35,7 @@ bool UserDiscoveryPopup::init(int priority) {
     title->setPosition(winSize.width / 2, winSize.height / 2 + 90.f);
     m_mainLayer->addChild(title);
 
-    // Close Button
+    // Close Button (using 3-arg helper for macOS compatibility)
     auto closeSprite = CCSprite::createWithSpriteFrameName("GJ_closeBtn_001.png");
     auto closeBtn = CCMenuItemSpriteExtra::create(
         closeSprite,
@@ -73,6 +80,11 @@ bool UserDiscoveryPopup::init(int priority) {
     menu->addChild(refreshBtn);
     menu->setPosition({ winSize.width / 2 + 125.f, winSize.height / 2 - 85.f });
     m_mainLayer->addChild(menu);
+
+    this->setKeypadEnabled(true);
+    this->setTouchEnabled(true);
+    // Standard priority for popups
+    CCTouchDispatcher::get()->addTargetedDelegate(this, -150, true);
 
     return true;
 }
@@ -148,6 +160,10 @@ void UserDiscoveryPopup::onClose(cocos2d::CCObject*) {
     this->removeFromParentAndCleanup(true);
 }
 
+void UserDiscoveryPopup::keyBackClicked() {
+    onClose(nullptr);
+}
+
 void UserDiscoveryPopup::show() {
-    FLAlertLayer::show();
+    CCDirector::sharedDirector()->getRunningScene()->addChild(this, 100);
 }
