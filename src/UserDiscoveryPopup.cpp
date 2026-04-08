@@ -41,6 +41,7 @@ bool UserDiscoveryPopup::setup() {
     refreshBtnSprite->setScale(0.8f);
     auto refreshBtn = CCMenuItemSpriteExtra::create(
         refreshBtnSprite,
+        nullptr,
         this,
         menu_selector(UserDiscoveryPopup::onRefresh)
     );
@@ -93,6 +94,7 @@ void UserDiscoveryPopup::updateList() {
         auto inviteBtnSprite = ButtonSprite::create("Invite", 40, true, "goldFont.fnt", "GJ_button_01.png", 30.f, 0.6f);
         auto inviteBtn = CCMenuItemSpriteExtra::create(
             inviteBtnSprite,
+            nullptr,
             this,
             menu_selector(UserDiscoveryPopup::onInvite)
         );

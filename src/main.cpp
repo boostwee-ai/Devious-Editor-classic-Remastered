@@ -21,6 +21,7 @@ class $modify(CollabEditorUI, EditorUI) {
         
         auto collabBtn = CCMenuItemSpriteExtra::create(
             collabSprite,
+            nullptr,
             this,
             menu_selector(CollabEditorUI::onCollabButton)
         );
