@@ -74,44 +74,49 @@ void CollaborationSession::update(float dt) {
 
 void CollaborationSession::handleUdpMessage(const std::string& ip, const std::string& message) {
     if (message.empty() || message.length() > 1024) return;
-    log::debug("Received UDP from {}: {}", ip, message);
-    // Basic verification and platform check
-    try {
-        auto parseResult = matjson::parse(message);
-        if (!parseResult.isOk()) return;
-        matjson::Value parsed = parseResult.unwrap();
-        if (!parsed.contains("type") || !parsed.contains("platform")) return;
+    
+    // Move all processing to the main thread to ensure absolute thread safety with game objects
+    Loader::get()->queueInMainThread([this, ip, message] {
+        log::debug("Received UDP from {}: {}", ip, message);
+        // Basic verification and platform check
+        try {
+            auto parseResult = matjson::parse(message);
+            if (!parseResult.isOk()) return;
+            matjson::Value parsed = parseResult.unwrap();
+            
+            if (!parsed.contains("type") || !parsed.contains("platform")) return;
 
-        Packets::Platform remotePlatform = static_cast<Packets::Platform>(parsed["platform"].asInt().unwrapOr(-1));
-        std::string username = parsed["user"].asString().unwrapOr("Unknown");
+            Packets::Platform remotePlatform = static_cast<Packets::Platform>(parsed["platform"].asInt().unwrapOr(-1));
+            std::string username = parsed["user"].asString().unwrapOr("Unknown");
 
-        int type = parsed["type"].asInt().unwrapOr(-1);
-        if (type == static_cast<int>(Packets::MessageType::DiscoveryRequest)) {
-            // Someone is broadcasting. Add them to the UI list if they aren't us.
-            if (username == m_localUsername) return;
+            int type = parsed["type"].asInt().unwrapOr(-1);
+            if (type == static_cast<int>(Packets::MessageType::DiscoveryRequest)) {
+                // Someone is broadcasting. Add them to the UI list if they aren't us.
+                if (username == m_localUsername) return;
 
-            std::lock_guard<std::mutex> lock(m_usersMutex);
-            auto now = std::chrono::duration_cast<std::chrono::seconds>(
-                std::chrono::system_clock::now().time_since_epoch()
-            ).count();
+                std::lock_guard<std::mutex> lock(m_usersMutex);
+                auto now = std::chrono::duration_cast<std::chrono::seconds>(
+                    std::chrono::system_clock::now().time_since_epoch()
+                ).count();
 
-            bool found = false;
-            for (auto& user : m_discoveredUsers) {
-                if (user.ip == ip) {
-                    user.lastSeen = now;
-                    user.username = username;
-                    user.platform = remotePlatform;
-                    found = true;
-                    break;
+                bool found = false;
+                for (auto& user : m_discoveredUsers) {
+                    if (user.ip == ip) {
+                        user.lastSeen = now;
+                        user.username = username;
+                        user.platform = remotePlatform;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    m_discoveredUsers.push_back({username, ip, remotePlatform, static_cast<double>(now)});
                 }
             }
 
-            if (!found) {
-                m_discoveredUsers.push_back({username, ip, remotePlatform, static_cast<double>(now)});
-            }
+        } catch (...) {
+            // invalid json
         }
-
-    } catch (...) {
-        // invalid json
-    }
+    });
 }

@@ -18,7 +18,7 @@ bool UserDiscoveryPopup::init() {
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     
     // Create a darken background layer manually
-    auto darken = CCLayerColor::create({ 0, 0, 0, 150 });
+    auto darken = CCLayerColor::create(ccc4(0, 0, 0, 150));
     this->addChild(darken);
 
     m_mainLayer = CCLayer::create();
@@ -26,7 +26,7 @@ bool UserDiscoveryPopup::init() {
 
     // Create background (standard GD popup size)
     auto bg = CCScale9Sprite::create("GJ_square01.png", { 0, 0, 80, 80 });
-    bg->setContentSize({ 300.f, 220.f });
+    bg->setContentSize(ccp(300.f, 220.f));
     bg->setPosition(winSize / 2);
     m_mainLayer->addChild(bg);
 
@@ -50,19 +50,19 @@ bool UserDiscoveryPopup::init() {
 
     // List Background
     auto listBg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    listBg->setColor({ 0, 0, 0 });
+    listBg->setColor(ccc3(0, 0, 0));
     listBg->setOpacity(75);
-    listBg->setContentSize({ 260.f, 140.f });
+    listBg->setContentSize(ccp(260.f, 140.f));
     listBg->setPosition(winSize / 2 + ccp(0, -10));
     m_mainLayer->addChild(listBg);
 
     // Scroll Layer
-    m_scrollLayer = ScrollLayer::create({ 260.f, 140.f });
+    m_scrollLayer = ScrollLayer::create(ccp(260.f, 140.f));
     m_scrollLayer->setPosition(listBg->getPosition() - listBg->getContentSize() / 2);
     m_mainLayer->addChild(m_scrollLayer);
 
     m_listMenu = CCMenu::create();
-    m_listMenu->setPosition({ 0, 0 });
+    m_listMenu->setPosition(ccp(0, 0));
     m_scrollLayer->m_contentLayer->addChild(m_listMenu);
 
     updateList();
@@ -82,7 +82,11 @@ bool UserDiscoveryPopup::init() {
     m_mainLayer->addChild(menu);
 
     this->setKeypadEnabled(true);
-    this->setTouchEnabled(true);
+    
+    // IMPORTANT: Don't use setTouchEnabled(true) if using addTargetedDelegate at a specific priority.
+    // This causes double-registration crashes on Windows.
+    this->setTouchEnabled(false);
+    
     // Standard priority for popups
     CCTouchDispatcher::get()->addTargetedDelegate(this, -150, true);
 
@@ -93,10 +97,10 @@ void UserDiscoveryPopup::updateList() {
     m_listMenu->removeAllChildren();
     
     auto users = CollaborationSession::get().getDiscoveredUsers();
-    float height = std::max(140.f, users.size() * 35.f);
+    float height = std::max(140.f, static_cast<float>(users.size() * 35.f));
     
-    m_listMenu->setContentSize({ 260.f, height });
-    m_scrollLayer->m_contentLayer->setContentSize({ 260.f, height });
+    m_listMenu->setContentSize(ccp(260.f, height));
+    m_scrollLayer->m_contentLayer->setContentSize(ccp(260.f, height));
     
     float y = height - 20.f;
 
