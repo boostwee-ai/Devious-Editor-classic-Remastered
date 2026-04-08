@@ -1,0 +1,18 @@
+{
+	"geode": "5.5.3",
+	"version": "v1.0.0",
+	"id": "bishop.devious_editor_classic_remastered",
+	"name": "Devious Editor Classic Remastered",
+	"developer": "Bishop",
+	"description": "Real-time LAN collaborative level editing.",
+	"repository": "https://github.com/bishop/Devious-Editor-classic-Remastered",
+	"dependencies": [],
+	"settings": {
+		"allow-collab": {
+			"name": "Allow Collaboration Requests",
+			"description": "If enabled, you will be visible on the LAN and receive pop-up requests when other mod users want to join your level session.",
+			"type": "bool",
+			"default": true
+		}
+	}
+}
