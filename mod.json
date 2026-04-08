@@ -11,7 +11,7 @@
 	"developer": "Bishop",
 	"description": "Real-time LAN collaborative level editing.",
 	"repository": "https://github.com/bishop/Devious-Editor-classic-Remastered",
-	"dependencies": [],
+	"dependencies": {},
 	"settings": {
 		"allow-collab": {
 			"name": "Allow Collaboration Requests",
