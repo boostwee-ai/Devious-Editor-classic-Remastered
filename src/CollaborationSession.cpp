@@ -54,17 +54,16 @@ void CollaborationSession::update(float dt) {
 void CollaborationSession::handleUdpMessage(const std::string& ip, const std::string& message) {
     // Basic verification and platform check
     try {
-        matjson::Value parsed = matjson::parse(message);
+        auto parseResult = matjson::parse(message);
+        if (!parseResult.isOk()) return;
+        matjson::Value parsed = parseResult.unwrap();
         if (!parsed.contains("type") || !parsed.contains("platform")) return;
 
         Packets::Platform remotePlatform = static_cast<Packets::Platform>(parsed["platform"].asInt().unwrapOr(-1));
         Packets::Platform localPlatform = Packets::getCurrentPlatform();
 
-        // Enforce same-OS constraint!
-        if (remotePlatform != localPlatform) {
-            // Ignore messages from other OS platforms
-            return;
-        }
+        // Cross-platform collaboration is explicitly allowed!
+        // (We preserve the platform enum in parsing just in case we want to show OS icons in the future UI)
 
         int type = parsed["type"].asInt().unwrapOr(-1);
         if (type == static_cast<int>(Packets::MessageType::DiscoveryRequest)) {
