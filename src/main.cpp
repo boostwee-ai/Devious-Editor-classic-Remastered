@@ -3,6 +3,8 @@
 #include <Geode/modify/LevelEditorLayer.hpp>
 #include "CollaborationSession.hpp"
 
+#include "UserDiscoveryPopup.hpp"
+
 using namespace geode::prelude;
 
 // UI Hook
@@ -33,11 +35,7 @@ class $modify(CollabEditorUI, EditorUI) {
     }
 
     void onCollabButton(CCObject* sender) {
-        FLAlertLayer::create(
-            "Collab Network", 
-            "Currently broadcasting discovery pings to the Local Network.\n(Networking is active, UI panel in development!)", 
-            "OK"
-        )->show();
+        UserDiscoveryPopup::create()->show();
     }
 };
 

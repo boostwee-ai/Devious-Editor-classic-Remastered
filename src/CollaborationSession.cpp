@@ -1,6 +1,8 @@
 #include "CollaborationSession.hpp"
 #include "NetworkManager.hpp"
 #include <Geode/Geode.hpp>
+#include <chrono>
+#include <algorithm>
 
 using namespace geode::prelude;
 
@@ -33,6 +35,11 @@ void CollaborationSession::onExitEditor() {
     NetworkManager::get().stopUdpDiscovery();
 }
 
+std::vector<DiscoveredUser> CollaborationSession::getDiscoveredUsers() {
+    std::lock_guard<std::mutex> lock(m_usersMutex);
+    return m_discoveredUsers;
+}
+
 void CollaborationSession::update(float dt) {
     if (!m_inEditor || !isCollabEnabled()) return;
 
@@ -48,6 +55,19 @@ void CollaborationSession::update(float dt) {
         payload["user"] = GJAccountManager::get()->m_username;
 
         NetworkManager::get().sendUdpBroadcast(payload.dump(matjson::NO_INDENTATION), 54321);
+
+        // Prune old users (timed out)
+        std::lock_guard<std::mutex> lock(m_usersMutex);
+        auto now = std::chrono::duration_cast<std::chrono::seconds>(
+            std::chrono::system_clock::now().time_since_epoch()
+        ).count();
+
+        m_discoveredUsers.erase(
+            std::remove_if(m_discoveredUsers.begin(), m_discoveredUsers.end(), [now](const DiscoveredUser& user) {
+                return (now - user.lastSeen) > 10.0; // 10 second timeout
+            }),
+            m_discoveredUsers.end()
+        );
     }
 }
 
@@ -60,15 +80,32 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
         if (!parsed.contains("type") || !parsed.contains("platform")) return;
 
         Packets::Platform remotePlatform = static_cast<Packets::Platform>(parsed["platform"].asInt().unwrapOr(-1));
-        Packets::Platform localPlatform = Packets::getCurrentPlatform();
-
-        // Cross-platform collaboration is explicitly allowed!
-        // (We preserve the platform enum in parsing just in case we want to show OS icons in the future UI)
+        std::string username = parsed["user"].asString().unwrapOr("Unknown");
 
         int type = parsed["type"].asInt().unwrapOr(-1);
         if (type == static_cast<int>(Packets::MessageType::DiscoveryRequest)) {
             // Someone is broadcasting. Add them to the UI list if they aren't us.
-            // (Handling omitted for brevity, would dispatch to main thread UI)
+            if (username == GJAccountManager::get()->m_username) return;
+
+            std::lock_guard<std::mutex> lock(m_usersMutex);
+            auto now = std::chrono::duration_cast<std::chrono::seconds>(
+                std::chrono::system_clock::now().time_since_epoch()
+            ).count();
+
+            bool found = false;
+            for (auto& user : m_discoveredUsers) {
+                if (user.ip == ip) {
+                    user.lastSeen = now;
+                    user.username = username;
+                    user.platform = remotePlatform;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                m_discoveredUsers.push_back({username, ip, remotePlatform, static_cast<double>(now)});
+            }
         }
 
     } catch (...) {

@@ -2,10 +2,18 @@
 
 #include <string>
 #include <vector>
+#include <mutex>
 #include "NetworkMessages.hpp"
 
 // We use JSON for string serialization over UDP
 #include <Geode/utils/JsonValidation.hpp>
+
+struct DiscoveredUser {
+    std::string username;
+    std::string ip;
+    Packets::Platform platform;
+    double lastSeen; // timestamp in seconds
+};
 
 class CollaborationSession {
 public:
@@ -18,6 +26,8 @@ public:
     void onExitEditor();
 
     bool isCollabEnabled() const;
+    
+    std::vector<DiscoveredUser> getDiscoveredUsers();
 
 private:
     CollaborationSession() = default;
@@ -27,4 +37,6 @@ private:
     
     bool m_inEditor = false;
     float m_discoveryTimer = 0.f;
+    std::vector<DiscoveredUser> m_discoveredUsers;
+    std::mutex m_usersMutex;
 };
