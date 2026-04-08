@@ -12,7 +12,9 @@ UserDiscoveryPopup* UserDiscoveryPopup::create() {
     return nullptr;
 }
 
-bool UserDiscoveryPopup::setup() {
+bool UserDiscoveryPopup::init(float width, float height) {
+    if (!geode::Popup<>::init(width, height)) return false;
+
     this->setTitle("Local Users");
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();

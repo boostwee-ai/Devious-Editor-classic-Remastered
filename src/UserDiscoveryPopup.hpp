@@ -4,9 +4,11 @@
 #include <Geode/ui/Popup.hpp>
 #include "CollaborationSession.hpp"
 
-class UserDiscoveryPopup : public geode::Popup {
+class UserDiscoveryPopup : public geode::Popup<> {
 protected:
-    bool setup() override;
+    bool init(float width, float height) override;
+    // setup() is no longer used in newer Geode versions, use init() instead
+
     void onRefresh(cocos2d::CCObject*);
     void onInvite(cocos2d::CCObject*);
     
