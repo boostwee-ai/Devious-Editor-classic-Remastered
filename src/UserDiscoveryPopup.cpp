@@ -94,6 +94,7 @@ bool UserDiscoveryPopup::init() {
 }
 
 void UserDiscoveryPopup::updateList() {
+    log::debug("Starting user list population...");
     m_listMenu->removeAllChildren();
     
     auto users = CollaborationSession::get().getDiscoveredUsers();
@@ -105,41 +106,69 @@ void UserDiscoveryPopup::updateList() {
     float y = height - 20.f;
 
     if (users.empty()) {
+        log::debug("No users found, showing empty label");
         auto label = CCLabelBMFont::create("No users found...", "goldFont.fnt");
-        label->setScale(0.6f);
-        label->setPosition({ 130.f, height / 2 });
-        m_listMenu->addChild(label);
+        if (label) {
+            label->setScale(0.6f);
+            label->setPosition(ccp(130.f, height / 2));
+            m_listMenu->addChild(label);
+        }
     }
 
     for (const auto& user : users) {
+        log::debug("Building UI for user: {} ({})", user.username, user.ip);
+
         auto nameLabel = CCLabelBMFont::create(user.username.c_str(), "bigFont.fnt");
-        nameLabel->setScale(0.45f);
-        nameLabel->setAnchorPoint({ 0, 0.5f });
-        nameLabel->setPosition({ 15.f, y });
-        m_listMenu->addChild(nameLabel);
+        if (nameLabel) {
+            nameLabel->setScale(0.45f);
+            nameLabel->setAnchorPoint(ccp(0, 0.5f));
+            nameLabel->setPosition(ccp(15.f, y));
+            m_listMenu->addChild(nameLabel);
+        }
 
         std::string info = (user.platform == Packets::Platform::Windows ? "Win" : "Mac");
         info += " | " + user.ip;
+        
         auto infoLabel = CCLabelBMFont::create(info.c_str(), "chatFont.fnt");
-        infoLabel->setScale(0.6f);
-        infoLabel->setAnchorPoint({ 0, 0.5f });
-        infoLabel->setColor({ 200, 200, 200 });
-        infoLabel->setPosition({ 15.f, y - 12.f });
-        m_listMenu->addChild(infoLabel);
+        if (infoLabel) {
+            infoLabel->setScale(0.6f);
+            infoLabel->setAnchorPoint(ccp(0, 0.5f));
+            infoLabel->setColor(ccc3(200, 200, 200));
+            infoLabel->setPosition(ccp(15.f, y - 12.f));
+            m_listMenu->addChild(infoLabel);
+        }
 
-        auto inviteBtnSprite = ButtonSprite::create("Invite", 40, true, "goldFont.fnt", "GJ_button_01.png", 30.f, 0.6f);
-        auto inviteBtn = CCMenuItemSpriteExtra::create(
-            inviteBtnSprite,
-            this,
-            menu_selector(UserDiscoveryPopup::onInvite)
-        );
-        inviteBtn->setID(user.ip);
-        inviteBtn->setPosition({ 210.f, y - 5.f });
-        m_listMenu->addChild(inviteBtn);
+        log::debug("Creating invite button for {}", user.ip);
+        
+        // Using a simpler sprite construction for the button to avoid internal ButtonSprite crashes
+        auto inviteBtnSprite = CCSprite::createWithSpriteFrameName("GJ_button_01.png");
+        if (inviteBtnSprite) {
+            inviteBtnSprite->setScale(0.5f);
+            
+            auto btnLabel = CCLabelBMFont::create("Invite", "goldFont.fnt");
+            if (btnLabel) {
+                btnLabel->setScale(0.8f);
+                btnLabel->setPosition(inviteBtnSprite->getContentSize() / 2);
+                inviteBtnSprite->addChild(btnLabel);
+            }
+
+            auto inviteBtn = CCMenuItemSpriteExtra::create(
+                inviteBtnSprite,
+                this,
+                menu_selector(UserDiscoveryPopup::onInvite)
+            );
+            
+            if (inviteBtn) {
+                inviteBtn->setID(user.ip);
+                inviteBtn->setPosition(ccp(210.f, y - 5.f));
+                m_listMenu->addChild(inviteBtn);
+            }
+        }
 
         y -= 35.f;
     }
 
+    log::debug("Finished building user list UI.");
     m_scrollLayer->moveToTop();
 }
 

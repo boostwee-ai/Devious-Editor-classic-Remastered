@@ -94,6 +94,17 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
                 // Someone is broadcasting. Add them to the UI list if they aren't us.
                 if (username == m_localUsername) return;
 
+                // Sanitize username and IP to avoid rendering crashes
+                auto sanitize = [](std::string str) {
+                    str.erase(std::remove_if(str.begin(), str.end(), [](unsigned char c) {
+                        return c < 32 || c > 126;
+                    }), str.end());
+                    return str;
+                };
+
+                username = sanitize(username);
+                std::string safeIp = sanitize(ip);
+
                 std::lock_guard<std::mutex> lock(m_usersMutex);
                 auto now = std::chrono::duration_cast<std::chrono::seconds>(
                     std::chrono::system_clock::now().time_since_epoch()
@@ -101,7 +112,7 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
 
                 bool found = false;
                 for (auto& user : m_discoveredUsers) {
-                    if (user.ip == ip) {
+                    if (user.ip == safeIp) {
                         user.lastSeen = now;
                         user.username = username;
                         user.platform = remotePlatform;
@@ -111,7 +122,8 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
                 }
 
                 if (!found) {
-                    m_discoveredUsers.push_back({username, ip, remotePlatform, static_cast<double>(now)});
+                    log::debug("Adding discovered user: {} ({})", username, safeIp);
+                    m_discoveredUsers.push_back({username, safeIp, remotePlatform, static_cast<double>(now)});
                 }
             }
 
