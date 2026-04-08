@@ -4,7 +4,7 @@ using namespace geode::prelude;
 
 UserDiscoveryPopup* UserDiscoveryPopup::create() {
     auto ret = new UserDiscoveryPopup();
-    if (ret && ret->init()) {
+    if (ret && ret->init(150)) {
         ret->autorelease();
         return ret;
     }
@@ -12,8 +12,8 @@ UserDiscoveryPopup* UserDiscoveryPopup::create() {
     return nullptr;
 }
 
-bool UserDiscoveryPopup::init() {
-    if (!FLAlertLayer::init(150)) return false;
+bool UserDiscoveryPopup::init(int priority) {
+    if (!FLAlertLayer::init(priority)) return false;
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     

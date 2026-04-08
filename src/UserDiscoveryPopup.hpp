@@ -4,9 +4,9 @@
 #include "CollaborationSession.hpp"
 
 // We use FLAlertLayer directly to ensure maximum compatibility across SDK versions
-class UserDiscoveryPopup : public geode::FLAlertLayer {
+class UserDiscoveryPopup : public FLAlertLayer {
 protected:
-    bool init() override;
+    bool init(int priority) override;
     void onRefresh(cocos2d::CCObject*);
     void onInvite(cocos2d::CCObject*);
     void onClose(cocos2d::CCObject*);
