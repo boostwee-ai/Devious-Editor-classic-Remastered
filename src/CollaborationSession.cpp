@@ -42,7 +42,7 @@ void CollaborationSession::update(float dt) {
         m_discoveryTimer = 0.f;
         
         // Simple JSON payload for discovery
-        matjson::Value payload = matjson::Object();
+        matjson::Value payload = matjson::makeObject();
         payload["type"] = static_cast<int>(Packets::MessageType::DiscoveryRequest);
         payload["platform"] = static_cast<int>(Packets::getCurrentPlatform());
         payload["user"] = GJAccountManager::get()->m_username;
