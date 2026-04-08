@@ -1,25 +1,30 @@
-cmake_minimum_required(VERSION 3.20)
-project(DeviousEditorClassicRemastered)
-
-# Geode SDK
-find_package(Geode REQUIRED)
-
-# Network libraries for Windows / Apple
-if(GEODE_IS_WINDOWS)
-    set(PLATFORM_NETWORK_LIBS ws2_32)
-    set(OS_DEFINE CURRENT_OS_WINDOWS)
-elseif(GEODE_IS_MACOS)
-    set(PLATFORM_NETWORK_LIBS "")
-    set(OS_DEFINE CURRENT_OS_MACOS)
+cmake_minimum_required(VERSION 3.21)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+if ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS" OR IOS)
+    set(CMAKE_OSX_ARCHITECTURES "arm64")
 else()
-    set(PLATFORM_NETWORK_LIBS "")
-    set(OS_DEFINE CURRENT_OS_UNKNOWN)
+    set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")  
+endif()
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+
+project(DeviousEditorClassicRemastered VERSION 1.0.0)
+
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
+
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
+
+if (NOT DEFINED ENV{GEODE_SDK})
+    message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
+else()
+    message(STATUS "Found Geode: $ENV{GEODE_SDK}")   
 endif()
 
-# Gather all cpp source files
-file(GLOB_RECURSE SRC "src/*.cpp")
+add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
+
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ws2_32)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_OS_WINDOWS)
+endif()
 
 setup_geode_mod(${PROJECT_NAME})
-target_sources(${PROJECT_NAME} PRIVATE ${SRC})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${PLATFORM_NETWORK_LIBS})
-target_compile_definitions(${PROJECT_NAME} PRIVATE ${OS_DEFINE})
