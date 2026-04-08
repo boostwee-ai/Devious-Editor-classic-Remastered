@@ -4,7 +4,7 @@
 #include <Geode/ui/Popup.hpp>
 #include "CollaborationSession.hpp"
 
-class UserDiscoveryPopup : public geode::Popup<> {
+class UserDiscoveryPopup : public geode::Popup {
 protected:
     bool setup() override;
     void onRefresh(cocos2d::CCObject*);
