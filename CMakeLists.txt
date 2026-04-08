@@ -24,7 +24,7 @@ add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
 if(WIN32)
     target_link_libraries(${PROJECT_NAME} ws2_32)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_OS_WINDOWS)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_OS_WINDOWS WIN32_LEAN_AND_MEAN)
 endif()
 
 setup_geode_mod(${PROJECT_NAME})
