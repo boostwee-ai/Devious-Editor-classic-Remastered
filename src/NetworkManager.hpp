@@ -8,7 +8,8 @@
 #include <mutex>
 
 #ifdef CURRENT_OS_WINDOWS
-#include <winsock.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>

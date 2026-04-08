@@ -114,7 +114,11 @@ void NetworkManager::udpListenLoop() {
         int bytesRead = recvfrom(m_udpSocket, buffer, sizeof(buffer) - 1, 0, (sockaddr*)&senderAddr, &senderAddrSize);
         if (bytesRead > 0) {
             buffer[bytesRead] = '\0';
-            std::string fromIp = inet_ntoa(senderAddr.sin_addr);
+            
+            char ipStr[INET_ADDRSTRLEN];
+            inet_ntop(AF_INET, &senderAddr.sin_addr, ipStr, INET_ADDRSTRLEN);
+            std::string fromIp(ipStr);
+
             if (onUdpMessage) {
                 onUdpMessage(fromIp, std::string(buffer));
             }

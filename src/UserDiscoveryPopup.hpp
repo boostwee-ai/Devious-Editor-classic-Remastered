@@ -7,6 +7,7 @@
 class UserDiscoveryPopup : public cocos2d::CCLayer {
 protected:
     bool init() override;
+    virtual ~UserDiscoveryPopup();
     void onRefresh(cocos2d::CCObject*);
     void onInvite(cocos2d::CCObject*);
     void onClose(cocos2d::CCObject*);

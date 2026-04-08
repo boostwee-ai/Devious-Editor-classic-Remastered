@@ -74,6 +74,7 @@ void CollaborationSession::update(float dt) {
 
 void CollaborationSession::handleUdpMessage(const std::string& ip, const std::string& message) {
     if (message.empty() || message.length() > 1024) return;
+    log::debug("Received UDP from {}: {}", ip, message);
     // Basic verification and platform check
     try {
         auto parseResult = matjson::parse(message);

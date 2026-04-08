@@ -154,6 +154,10 @@ void UserDiscoveryPopup::onInvite(cocos2d::CCObject* sender) {
     )->show();
 }
 
+UserDiscoveryPopup::~UserDiscoveryPopup() {
+    CCTouchDispatcher::get()->removeDelegate(this);
+}
+
 void UserDiscoveryPopup::onClose(cocos2d::CCObject*) {
     this->setKeypadEnabled(false);
     this->setTouchEnabled(false);
