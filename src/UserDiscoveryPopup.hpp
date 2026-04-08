@@ -20,5 +20,6 @@ protected:
 
 public:
     static UserDiscoveryPopup* create();
+    void updateList();
     void show();
 };
