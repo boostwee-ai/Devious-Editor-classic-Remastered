@@ -4,7 +4,7 @@ using namespace geode::prelude;
 
 UserDiscoveryPopup* UserDiscoveryPopup::create() {
     auto ret = new UserDiscoveryPopup();
-    if (ret && ret->init(300.f, 220.f)) {
+    if (ret && ret->init()) {
         ret->autorelease();
         return ret;
     }
@@ -12,24 +12,46 @@ UserDiscoveryPopup* UserDiscoveryPopup::create() {
     return nullptr;
 }
 
-bool UserDiscoveryPopup::init(float width, float height) {
-    if (!geode::Popup<>::init(width, height)) return false;
-
-    this->setTitle("Local Users");
+bool UserDiscoveryPopup::init() {
+    if (!FLAlertLayer::init(150)) return false;
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();
     
-    // Background for the list
-    auto bg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
-    bg->setColor({ 0, 0, 0 });
-    bg->setOpacity(75);
-    bg->setContentSize({ 260.f, 140.f });
-    bg->setPosition(m_mainLayer->getContentSize() / 2 + ccp(0, -10));
+    // Create background (standard GD popup size)
+    auto bg = CCScale9Sprite::create("GJ_square01.png", { 0, 0, 80, 80 });
+    bg->setContentSize({ 300.f, 220.f });
+    bg->setPosition(winSize / 2);
     m_mainLayer->addChild(bg);
+
+    // Title
+    auto title = CCLabelBMFont::create("Local Users", "goldFont.fnt");
+    title->setPosition(winSize.width / 2, winSize.height / 2 + 90.f);
+    m_mainLayer->addChild(title);
+
+    // Close Button
+    auto closeSprite = CCSprite::createWithSpriteFrameName("GJ_closeBtn_001.png");
+    auto closeBtn = CCMenuItemSpriteExtra::create(
+        closeSprite,
+        this,
+        menu_selector(UserDiscoveryPopup::onClose)
+    );
+    
+    auto closeMenu = CCMenu::create();
+    closeMenu->addChild(closeBtn);
+    closeMenu->setPosition({ winSize.width / 2 - 140.f, winSize.height / 2 + 100.f });
+    m_mainLayer->addChild(closeMenu);
+
+    // List Background
+    auto listBg = CCScale9Sprite::create("square02b_001.png", { 0, 0, 80, 80 });
+    listBg->setColor({ 0, 0, 0 });
+    listBg->setOpacity(75);
+    listBg->setContentSize({ 260.f, 140.f });
+    listBg->setPosition(winSize / 2 + ccp(0, -10));
+    m_mainLayer->addChild(listBg);
 
     // Scroll Layer
     m_scrollLayer = ScrollLayer::create({ 260.f, 140.f });
-    m_scrollLayer->setPosition(bg->getPosition() - bg->getContentSize() / 2);
+    m_scrollLayer->setPosition(listBg->getPosition() - listBg->getContentSize() / 2);
     m_mainLayer->addChild(m_scrollLayer);
 
     m_listMenu = CCMenu::create();
@@ -43,14 +65,13 @@ bool UserDiscoveryPopup::init(float width, float height) {
     refreshBtnSprite->setScale(0.8f);
     auto refreshBtn = CCMenuItemSpriteExtra::create(
         refreshBtnSprite,
-        nullptr,
         this,
         menu_selector(UserDiscoveryPopup::onRefresh)
     );
     
     auto menu = CCMenu::create();
     menu->addChild(refreshBtn);
-    menu->setPosition({ m_mainLayer->getContentSize().width - 25, 25 });
+    menu->setPosition({ winSize.width / 2 + 125.f, winSize.height / 2 - 85.f });
     m_mainLayer->addChild(menu);
 
     return true;
@@ -75,14 +96,12 @@ void UserDiscoveryPopup::updateList() {
     }
 
     for (const auto& user : users) {
-        // User Name
         auto nameLabel = CCLabelBMFont::create(user.username.c_str(), "bigFont.fnt");
         nameLabel->setScale(0.45f);
         nameLabel->setAnchorPoint({ 0, 0.5f });
         nameLabel->setPosition({ 15.f, y });
         m_listMenu->addChild(nameLabel);
 
-        // Platform / IP
         std::string info = (user.platform == Packets::Platform::Windows ? "Win" : "Mac");
         info += " | " + user.ip;
         auto infoLabel = CCLabelBMFont::create(info.c_str(), "chatFont.fnt");
@@ -92,15 +111,13 @@ void UserDiscoveryPopup::updateList() {
         infoLabel->setPosition({ 15.f, y - 12.f });
         m_listMenu->addChild(infoLabel);
 
-        // Invite Button
         auto inviteBtnSprite = ButtonSprite::create("Invite", 40, true, "goldFont.fnt", "GJ_button_01.png", 30.f, 0.6f);
         auto inviteBtn = CCMenuItemSpriteExtra::create(
             inviteBtnSprite,
-            nullptr,
             this,
             menu_selector(UserDiscoveryPopup::onInvite)
         );
-        inviteBtn->setID(user.ip); // Store IP in ID for retrieval
+        inviteBtn->setID(user.ip);
         inviteBtn->setPosition({ 210.f, y - 5.f });
         m_listMenu->addChild(inviteBtn);
 
@@ -123,4 +140,14 @@ void UserDiscoveryPopup::onInvite(cocos2d::CCObject* sender) {
         "Sending collaboration request to " + targetIp + ".\n(TCP handshaking in development!)", 
         "OK"
     )->show();
+}
+
+void UserDiscoveryPopup::onClose(cocos2d::CCObject*) {
+    this->setKeypadEnabled(false);
+    this->setTouchEnabled(false);
+    this->removeFromParentAndCleanup(true);
+}
+
+void UserDiscoveryPopup::show() {
+    FLAlertLayer::show();
 }

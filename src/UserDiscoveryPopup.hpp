@@ -1,16 +1,15 @@
 #pragma once
 
 #include <Geode/Geode.hpp>
-#include <Geode/ui/Popup.hpp>
 #include "CollaborationSession.hpp"
 
-class UserDiscoveryPopup : public geode::Popup<> {
+// We use FLAlertLayer directly to ensure maximum compatibility across SDK versions
+class UserDiscoveryPopup : public geode::FLAlertLayer {
 protected:
-    bool init(float width, float height) override;
-    // setup() is no longer used in newer Geode versions, use init() instead
-
+    bool init() override;
     void onRefresh(cocos2d::CCObject*);
     void onInvite(cocos2d::CCObject*);
+    void onClose(cocos2d::CCObject*);
     
     geode::ScrollLayer* m_scrollLayer = nullptr;
     cocos2d::CCMenu* m_listMenu = nullptr;
@@ -18,4 +17,5 @@ protected:
 public:
     static UserDiscoveryPopup* create();
     void updateList();
+    void show();
 };
