@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <cmath>
+#include <sstream>
 
 using namespace geode::prelude;
 
@@ -15,9 +16,12 @@ static constexpr int CURSOR_BASE_TAG = 10000;
 
 // ─────────────────────────────────────────────────────────────────────────────
 std::string CollaborationSession::fmtFloat(float f) {
-    char buf[32];
-    std::snprintf(buf, sizeof(buf), "%.2f", f);
-    return buf;
+    char buf[64];
+    std::snprintf(buf, sizeof(buf), "%.3f", f);
+    std::string s(buf);
+    // Replace comma with dot for locales (e.g. Europe) so GD doesn't break
+    std::replace(s.begin(), s.end(), ',', '.');
+    return s;
 }
 
 void CollaborationSession::sendUdpToSession(const std::string& data) {
@@ -239,7 +243,6 @@ CachedLevelSettings CollaborationSession::readLevelSettings(LevelEditorLayer* ed
     CachedLevelSettings s{};
     if (!edl) return s;
 
-    // Field names verified against Geode SDK / GD 2.2081 bindings:
     auto* ls = edl->m_levelSettings;
     if (!ls) return s;
 
@@ -249,6 +252,7 @@ CachedLevelSettings CollaborationSession::readLevelSettings(LevelEditorLayer* ed
     s.gameMode   = ls->m_startMode;
     s.platformer = ls->m_platformerMode;
     s.twoPlayer  = ls->m_twoPlayerMode;
+    s.rawData    = ls->getSaveString(); 
     return s;
 }
 
@@ -263,6 +267,27 @@ void CollaborationSession::applyLevelSettings(const CachedLevelSettings& s, Leve
     ls->m_startMode       = s.gameMode;
     ls->m_platformerMode  = s.platformer;
     ls->m_twoPlayerMode   = s.twoPlayer;
+
+    // Apply color actions from rawData (kS keys hold ColorAction strings)
+    if (!s.rawData.empty() && ls->m_effectManager) {
+        std::stringstream ss(s.rawData);
+        std::string part;
+        while (std::getline(ss, part, ';')) {
+            if (part.find("kS") == 0) {
+                size_t comma = part.find(',');
+                if (comma != std::string::npos) {
+                    std::string key = part.substr(0, comma);
+                    std::string val = part.substr(comma + 1);
+                    int colorId = std::atoi(key.substr(2).c_str());
+                    auto* action = ls->m_effectManager->getColorAction(colorId);
+                    if (action) {
+                        action->setupFromString(val);
+                    }
+                }
+            }
+        }
+    }
+
     m_lastSettings = s;
 }
 
@@ -278,6 +303,7 @@ void CollaborationSession::checkAndSyncSettings(LevelEditorLayer* edl) {
         p["gameMode"]   = current.gameMode;
         p["platformer"] = current.platformer;
         p["twoPlayer"]  = current.twoPlayer;
+        p["rawData"]    = current.rawData;
         sendUdpToSession(p.dump(matjson::NO_INDENTATION));
         log::debug("CollaborationSession: syncing settings to peer");
     }
@@ -338,6 +364,7 @@ void CollaborationSession::sendLevelInitViaTcp(LevelEditorLayer* edl) {
     payload["gameMode"]  = settings.gameMode;
     payload["platformer"]= settings.platformer;
     payload["twoPlayer"] = settings.twoPlayer;
+    payload["rawData"]   = settings.rawData;
     payload["objects"]   = objects; // semicolon-separated GD object strings
 
     bool ok = NetworkManager::get().sendTcp(payload.dump(matjson::NO_INDENTATION));
@@ -367,6 +394,7 @@ void CollaborationSession::handleTcpMessage(const std::string& data, LevelEditor
         s.gameMode   = msg["gameMode"].asInt().unwrapOr(0);
         s.platformer = msg["platformer"].asBool().unwrapOr(false);
         s.twoPlayer  = msg["twoPlayer"].asBool().unwrapOr(false);
+        s.rawData    = msg["rawData"].asString().unwrapOr("");
         applyLevelSettings(s, edl);
 
         // 2. Clear existing objects from guest's editor (native way is safer)
@@ -597,6 +625,7 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
                 s.gameMode   = parsed["gameMode"].asInt().unwrapOr(0);
                 s.platformer = parsed["platformer"].asBool().unwrapOr(false);
                 s.twoPlayer  = parsed["twoPlayer"].asBool().unwrapOr(false);
+                s.rawData    = parsed["rawData"].asString().unwrapOr("");
                 applyLevelSettings(s, edl);
             }
 

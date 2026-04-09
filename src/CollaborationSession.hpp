@@ -30,10 +30,12 @@ struct CachedLevelSettings {
     int  gameMode  = -1;
     bool platformer  = false;
     bool twoPlayer   = false;
+    std::string rawData; // holds LevelSettingsObject::getSaveString()
+
     bool operator==(const CachedLevelSettings& o) const {
         return bg == o.bg && ground == o.ground && speed == o.speed
             && gameMode == o.gameMode && platformer == o.platformer
-            && twoPlayer == o.twoPlayer;
+            && twoPlayer == o.twoPlayer && rawData == o.rawData;
     }
     bool operator!=(const CachedLevelSettings& o) const { return !(*this == o); }
 };
