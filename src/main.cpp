@@ -57,8 +57,8 @@ class $modify(CollabLevelEditorLayer, LevelEditorLayer) {
     }
 
     // ── Object placement ──────────────────────────────────────────────────────
-    void addObject(GameObject* obj) {
-        GJBaseGameLayer::addObject(obj);
+    void addToSection(GameObject* obj) {
+        LevelEditorLayer::addToSection(obj);
         // Guard: skip during init load (not yet in session) and during remote apply
         CollaborationSession::get().onLocalObjectPlaced(obj, this);
     }
