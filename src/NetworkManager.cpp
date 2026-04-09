@@ -201,6 +201,27 @@ void NetworkManager::sendUdpBroadcast(const std::string& data, uint16_t port) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+void NetworkManager::sendUdpUnicast(const std::string& data, const std::string& ip, uint16_t port) {
+    if (m_sendSocket == INVALID_SOCKET) return;
+
+    sockaddr_in dest{};
+    dest.sin_family = AF_INET;
+    dest.sin_port   = htons(port);
+    if (inet_pton(AF_INET, ip.c_str(), &dest.sin_addr) != 1) {
+        log::error("NetworkManager: invalid target IP '{}'", ip);
+        return;
+    }
+
+    int sent = sendto(m_sendSocket, data.c_str(), static_cast<int>(data.length()),
+                      0, (sockaddr*)&dest, sizeof(dest));
+    if (sent == SOCKET_ERROR) {
+        log::warn("NetworkManager: unicast sendto {} failed", ip);
+    } else {
+        log::debug("NetworkManager: unicast {} bytes -> {}:{}", sent, ip, port);
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 void NetworkManager::udpListenLoop() {
     char buffer[1024];
     sockaddr_in senderAddr{};

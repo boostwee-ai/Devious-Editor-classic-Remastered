@@ -44,6 +44,9 @@ public:
     // 255.255.255.255 is necessary for reliable cross-platform LAN delivery.
     void sendUdpBroadcast(const std::string& data, uint16_t port);
 
+    // Send a packet directly to a specific peer IP (for invite/response messages).
+    void sendUdpUnicast(const std::string& data, const std::string& ip, uint16_t port);
+
     // Called on the background receive thread; forward to CollaborationSession
     // which re-dispatches to the main thread.
     std::function<void(const std::string& fromIp, const std::string& data)> onUdpMessage;

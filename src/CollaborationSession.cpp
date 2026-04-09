@@ -6,6 +6,7 @@
 
 using namespace geode::prelude;
 
+// ─────────────────────────────────────────────────────────────────────────────
 CollaborationSession& CollaborationSession::get() {
     static CollaborationSession instance;
     return instance;
@@ -24,6 +25,7 @@ bool CollaborationSession::isCollabEnabled() const {
     return Mod::get()->getSettingValue<bool>("allow-collab");
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
 void CollaborationSession::onEnterEditor() {
     m_inEditor = true;
     m_discoveryTimer = 0.f;
@@ -36,7 +38,7 @@ void CollaborationSession::onEnterEditor() {
         m_localUsername = "Unknown";
     }
     if (isCollabEnabled()) {
-        NetworkManager::get().startUdpDiscovery(54321); // Default discovery port
+        NetworkManager::get().startUdpDiscovery(54321);
     }
 }
 
@@ -45,6 +47,7 @@ void CollaborationSession::onExitEditor() {
     NetworkManager::get().stopUdpDiscovery();
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
 std::vector<DiscoveredUser> CollaborationSession::getDiscoveredUsers() {
     std::lock_guard<std::mutex> lock(m_usersMutex);
     return m_discoveredUsers;
@@ -52,79 +55,99 @@ std::vector<DiscoveredUser> CollaborationSession::getDiscoveredUsers() {
 
 void CollaborationSession::forceBroadcastNow() {
     if (!m_inEditor || !isCollabEnabled()) return;
-    
+
     matjson::Value payload = matjson::Value::object();
     payload["type"]     = static_cast<int>(Packets::MessageType::DiscoveryRequest);
     payload["platform"] = static_cast<int>(Packets::getCurrentPlatform());
     payload["user"]     = m_localUsername;
 
     NetworkManager::get().sendUdpBroadcast(payload.dump(matjson::NO_INDENTATION), 54321);
-    m_discoveryTimer = 0.f; // reset the periodic timer
+    m_discoveryTimer = 0.f;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+void CollaborationSession::sendCollabInvite(const std::string& targetIp) {
+    matjson::Value payload = matjson::Value::object();
+    payload["type"]     = static_cast<int>(Packets::MessageType::CollabRequest);
+    payload["platform"] = static_cast<int>(Packets::getCurrentPlatform());
+    payload["user"]     = m_localUsername;
+
+    NetworkManager::get().sendUdpUnicast(payload.dump(matjson::NO_INDENTATION), targetIp, 54321);
+    log::info("CollaborationSession: sent collab invite to {}", targetIp);
+}
+
+void CollaborationSession::sendCollabResponse(const std::string& targetIp, bool accepted) {
+    matjson::Value payload = matjson::Value::object();
+    payload["type"]     = static_cast<int>(Packets::MessageType::CollabResponse);
+    payload["platform"] = static_cast<int>(Packets::getCurrentPlatform());
+    payload["user"]     = m_localUsername;
+    payload["accepted"] = accepted;
+
+    NetworkManager::get().sendUdpUnicast(payload.dump(matjson::NO_INDENTATION), targetIp, 54321);
+    log::info("CollaborationSession: sent collab response ({}) to {}", accepted ? "accept" : "decline", targetIp);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 void CollaborationSession::update(float dt) {
     if (!m_inEditor || !isCollabEnabled()) return;
 
     m_discoveryTimer += dt;
-    // Broadcast presence every 2 seconds
     if (m_discoveryTimer >= 2.0f) {
         m_discoveryTimer = 0.f;
-        
-        // Simple JSON payload for discovery
+
         matjson::Value payload = matjson::Value::object();
-        payload["type"] = static_cast<int>(Packets::MessageType::DiscoveryRequest);
+        payload["type"]     = static_cast<int>(Packets::MessageType::DiscoveryRequest);
         payload["platform"] = static_cast<int>(Packets::getCurrentPlatform());
-        payload["user"] = m_localUsername;
+        payload["user"]     = m_localUsername;
 
         NetworkManager::get().sendUdpBroadcast(payload.dump(matjson::NO_INDENTATION), 54321);
 
-        // Prune old users (timed out)
+        // Prune timed-out peers (no heartbeat for 10 seconds)
         std::lock_guard<std::mutex> lock(m_usersMutex);
         auto now = std::chrono::duration_cast<std::chrono::seconds>(
             std::chrono::system_clock::now().time_since_epoch()
         ).count();
 
         m_discoveredUsers.erase(
-            std::remove_if(m_discoveredUsers.begin(), m_discoveredUsers.end(), [now](const DiscoveredUser& user) {
-                return (now - user.lastSeen) > 10.0; // 10 second timeout
+            std::remove_if(m_discoveredUsers.begin(), m_discoveredUsers.end(), [now](const DiscoveredUser& u) {
+                return (now - u.lastSeen) > 10.0;
             }),
             m_discoveredUsers.end()
         );
     }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
 void CollaborationSession::handleUdpMessage(const std::string& ip, const std::string& message) {
     if (message.empty() || message.length() > 1024) return;
-    
-    // Move all processing to the main thread to ensure absolute thread safety with game objects
+
+    // All game/UI operations must happen on the main thread
     Loader::get()->queueInMainThread([this, ip, message] {
-        log::debug("Received UDP from {}: {}", ip, message);
-        // Basic verification and platform check
+        log::debug("CollaborationSession: UDP from {}: {}", ip, message);
+
         try {
             auto parseResult = matjson::parse(message);
             if (!parseResult.isOk()) return;
             matjson::Value parsed = parseResult.unwrap();
-            
+
             if (!parsed.contains("type") || !parsed.contains("platform")) return;
 
-            Packets::Platform remotePlatform = static_cast<Packets::Platform>(parsed["platform"].asInt().unwrapOr(-1));
-            std::string username = parsed["user"].asString().unwrapOr("Unknown");
-
             int type = parsed["type"].asInt().unwrapOr(-1);
+
+            auto sanitize = [](std::string str) {
+                str.erase(std::remove_if(str.begin(), str.end(), [](unsigned char c) {
+                    return c < 32 || c > 126;
+                }), str.end());
+                return str;
+            };
+
+            std::string username  = sanitize(parsed["user"].asString().unwrapOr("Unknown"));
+            std::string safeIp    = sanitize(ip);
+            Packets::Platform plat = static_cast<Packets::Platform>(parsed["platform"].asInt().unwrapOr(2));
+
+            // ── Discovery heartbeat ──────────────────────────────────────────
             if (type == static_cast<int>(Packets::MessageType::DiscoveryRequest)) {
-                // Someone is broadcasting. Add them to the UI list if they aren't us.
-                if (username == m_localUsername) return;
-
-                // Sanitize username and IP to avoid rendering crashes
-                auto sanitize = [](std::string str) {
-                    str.erase(std::remove_if(str.begin(), str.end(), [](unsigned char c) {
-                        return c < 32 || c > 126;
-                    }), str.end());
-                    return str;
-                };
-
-                username = sanitize(username);
-                std::string safeIp = sanitize(ip);
+                if (username == m_localUsername) return; // ignore own packets
 
                 std::lock_guard<std::mutex> lock(m_usersMutex);
                 auto now = std::chrono::duration_cast<std::chrono::seconds>(
@@ -136,20 +159,36 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
                     if (user.ip == safeIp) {
                         user.lastSeen = now;
                         user.username = username;
-                        user.platform = remotePlatform;
+                        user.platform = plat;
                         found = true;
                         break;
                     }
                 }
-
                 if (!found) {
-                    log::debug("Adding discovered user: {} ({})", username, safeIp);
-                    m_discoveredUsers.push_back({username, safeIp, remotePlatform, static_cast<double>(now)});
+                    log::debug("CollaborationSession: discovered {} ({})", username, safeIp);
+                    m_discoveredUsers.push_back({username, safeIp, plat, static_cast<double>(now)});
+                }
+            }
+
+            // ── Incoming collaboration invite ────────────────────────────────
+            else if (type == static_cast<int>(Packets::MessageType::CollabRequest)) {
+                log::info("CollaborationSession: collab invite from {} ({})", username, safeIp);
+                if (onCollabInviteReceived) {
+                    onCollabInviteReceived(username, safeIp);
+                }
+            }
+
+            // ── Response to our own invite ───────────────────────────────────
+            else if (type == static_cast<int>(Packets::MessageType::CollabResponse)) {
+                bool accepted = parsed["accepted"].asBool().unwrapOr(false);
+                log::info("CollaborationSession: {} {} our invite", username, accepted ? "accepted" : "declined");
+                if (onCollabResponseReceived) {
+                    onCollabResponseReceived(username, accepted);
                 }
             }
 
         } catch (...) {
-            // invalid json
+            // malformed JSON — ignore
         }
     });
 }

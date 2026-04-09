@@ -204,10 +204,12 @@ void UserDiscoveryPopup::onInvite(cocos2d::CCObject* sender) {
     auto btn = static_cast<CCMenuItemSpriteExtra*>(sender);
     if (!btn) return;
     std::string targetIp = btn->getID();
-    
+
+    CollaborationSession::get().sendCollabInvite(targetIp);
+
     FLAlertLayer::create(
-        "Invite Sent", 
-        "Sending collaboration request to " + targetIp + ".\n(TCP handshaking in development!)", 
+        "Invite Sent",
+        "Collaboration request sent to <cy>" + targetIp + "</c>.\nWaiting for their response...",
         "OK"
     )->show();
 }
