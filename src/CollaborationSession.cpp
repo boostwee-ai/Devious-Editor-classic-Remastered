@@ -346,10 +346,10 @@ std::string CollaborationSession::serializeAllObjects(LevelEditorLayer* edl) {
         if (obj->m_isFlipX) parts.push_back("4,1");
         if (obj->m_isFlipY) parts.push_back("5,1");
 
-        // Join parts with commas
+        // Join parts with commas. RESTORING TRAILING COMMA (GD 2.2 expects it)
         std::string s;
-        for (size_t i = 0; i < parts.size(); ++i) {
-            s += parts[i] + (i == parts.size() - 1 ? "" : ",");
+        for (const auto& p : parts) {
+            s += p + ",";
         }
         result += s + ";";
     }
@@ -456,6 +456,7 @@ void CollaborationSession::onLocalObjectPlaced(GameObject* obj, LevelEditorLayer
     p["sy"]   = static_cast<double>(obj->getScaleY());
     p["fx"]   = obj->m_isFlipX;
     p["fy"]   = obj->m_isFlipY;
+    p["z"]    = obj->m_nZOrder;
     sendUdpToSession(p.dump(matjson::NO_INDENTATION));
 }
 
@@ -483,35 +484,24 @@ void CollaborationSession::applyObjectPlace(const std::string& uid, int oid,
 {
     if (!edl || !edl->m_objectLayer) return;
 
-    // Build GD object string for createObjectsFromString
-    std::vector<std::string> parts;
-    parts.push_back("1," + std::to_string(oid));
-    parts.push_back("2," + fmtFloat(x));
-    parts.push_back("3," + fmtFloat(y));
-    if (std::fabsf(rot)      > 0.01f) parts.push_back("6,"  + fmtFloat(rot));
-    if (std::fabsf(sx - 1.f) > 0.01f) parts.push_back("32," + fmtFloat(sx));
-    if (std::fabsf(sy - 1.f) > 0.01f) parts.push_back("33," + fmtFloat(sy));
-
-    std::string s;
-    for (size_t i = 0; i < parts.size(); ++i) {
-        s += parts[i] + (i == parts.size() - 1 ? "" : ",");
-    }
-
-    int before = edl->m_objectLayer->getChildrenCount();
+    // Bypassing createObjectsFromString for reliability on real-time placement
     m_applyingRemoteChange = true;
-    edl->createObjectsFromString(s + ";", true, true);
-    m_applyingRemoteChange = false;
+    auto* obj = GameObject::create(oid);
+    if (obj) {
+        obj->setPosition({x, y});
+        obj->setRotation(rot);
+        obj->setScaleX(sx);
+        obj->setScaleY(sy);
+        obj->m_isFlipX = false; // logic below
+        obj->m_isFlipY = false;
 
-    // Associate the newly created child(ren) with the remote UID
-    int after = edl->m_objectLayer->getChildrenCount();
-    auto* children = edl->m_objectLayer->getChildren();
-    for (int i = before; i < after && children; i++) {
-        auto* obj = dynamic_cast<GameObject*>(children->objectAtIndex(i));
-        if (obj) {
-            m_uidToObject[uid] = obj;
-            m_objectToUid[obj] = uid;
-        }
+        edl->m_objectLayer->addChild(obj);
+        edl->addToSection(obj);
+        
+        m_uidToObject[uid] = obj;
+        m_objectToUid[obj] = uid;
     }
+    m_applyingRemoteChange = false;
 }
 
 void CollaborationSession::applyObjectDelete(const std::string& uid, LevelEditorLayer* edl) {
@@ -618,12 +608,23 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
                 if (!edl) return;
                 std::string uid = parsed["uid"].asString().unwrapOr("");
                 int   oid = parsed["oid"].asInt().unwrapOr(1);
-                float x   = static_cast<float>(parsed["x"].asDouble().unwrapOr(0.0));
-                float y   = static_cast<float>(parsed["y"].asDouble().unwrapOr(0.0));
                 float rot = static_cast<float>(parsed["rot"].asDouble().unwrapOr(0.0));
                 float sx  = static_cast<float>(parsed["sx"].asDouble().unwrapOr(1.0));
                 float sy  = static_cast<float>(parsed["sy"].asDouble().unwrapOr(1.0));
-                if (!uid.empty()) applyObjectPlace(uid, oid, x, y, rot, sx, sy, edl);
+                bool  fx  = parsed["fx"].asBool().unwrapOr(false);
+                bool  fy  = parsed["fy"].asBool().unwrapOr(false);
+                int   z   = parsed["z"].asInt().unwrapOr(0);
+                
+                if (!uid.empty()) {
+                    applyObjectPlace(uid, oid, x, y, rot, sx, sy, edl);
+                    // Apply flip and Z manually after creation in applyObjectPlace
+                    auto it = m_uidToObject.find(uid);
+                    if (it != m_uidToObject.end()) {
+                        it->second->m_isFlipX = fx;
+                        it->second->m_isFlipY = fy;
+                        it->second->setZOrder(z);
+                    }
+                }
             }
 
             // ── Object deleted ───────────────────────────────────────────────
