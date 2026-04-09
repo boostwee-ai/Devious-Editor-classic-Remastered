@@ -486,17 +486,12 @@ void CollaborationSession::applyObjectPlace(const std::string& uid, int oid,
 
     // Bypassing createObjectsFromString for reliability on real-time placement
     m_applyingRemoteChange = true;
-    auto* obj = GameObject::create(oid);
+    auto* obj = edl->createObject(oid, {x, y}, true);
     if (obj) {
-        obj->setPosition({x, y});
         obj->setRotation(rot);
         obj->setScaleX(sx);
         obj->setScaleY(sy);
-        obj->m_isFlipX = false; // logic below
-        obj->m_isFlipY = false;
-
-        edl->m_objectLayer->addChild(obj);
-        edl->addToSection(obj);
+        // obj->m_isFlipX/Y and setZOrder applied in handleUdpMessage loop
         
         m_uidToObject[uid] = obj;
         m_objectToUid[obj] = uid;
@@ -608,6 +603,8 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
                 if (!edl) return;
                 std::string uid = parsed["uid"].asString().unwrapOr("");
                 int   oid = parsed["oid"].asInt().unwrapOr(1);
+                float x   = static_cast<float>(parsed["x"].asDouble().unwrapOr(0.0));
+                float y   = static_cast<float>(parsed["y"].asDouble().unwrapOr(0.0));
                 float rot = static_cast<float>(parsed["rot"].asDouble().unwrapOr(0.0));
                 float sx  = static_cast<float>(parsed["sx"].asDouble().unwrapOr(1.0));
                 float sy  = static_cast<float>(parsed["sy"].asDouble().unwrapOr(1.0));
@@ -617,9 +614,9 @@ void CollaborationSession::handleUdpMessage(const std::string& ip, const std::st
                 
                 if (!uid.empty()) {
                     applyObjectPlace(uid, oid, x, y, rot, sx, sy, edl);
-                    // Apply flip and Z manually after creation in applyObjectPlace
+                    // Apply flip and Z manually after creation/retrieval
                     auto it = m_uidToObject.find(uid);
-                    if (it != m_uidToObject.end()) {
+                    if (it != m_uidToObject.end() && it->second) {
                         it->second->m_isFlipX = fx;
                         it->second->m_isFlipY = fy;
                         it->second->setZOrder(z);
