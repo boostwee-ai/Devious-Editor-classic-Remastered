@@ -115,6 +115,8 @@ bool IncomingInvitePopup::init(const std::string& fromUsername, const std::strin
 // ─────────────────────────────────────────────────────────────────────────────
 void IncomingInvitePopup::onAccept(cocos2d::CCObject*) {
     CollaborationSession::get().sendCollabResponse(m_fromIp, true);
+    // Enter Guest mode and initiate TCP connection to host
+    CollaborationSession::get().startGuestSession(m_fromIp, m_fromUsername);
     onClose(nullptr);
 }
 
