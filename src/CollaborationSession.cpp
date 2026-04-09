@@ -289,6 +289,9 @@ void CollaborationSession::applyLevelSettings(const CachedLevelSettings& s, Leve
     }
 
     m_lastSettings = s;
+
+    // Refresh visuals (Geode / GD 2.2081)
+    edl->updateOptions();
 }
 
 void CollaborationSession::checkAndSyncSettings(LevelEditorLayer* edl) {
@@ -325,22 +328,29 @@ std::string CollaborationSession::serializeAllObjects(LevelEditorLayer* edl) {
         if (obj->getTag() >= CURSOR_BASE_TAG && obj->getTag() < CURSOR_BASE_TAG + 10) continue;
 
         // Build GD-format object string: key,value pairs
-        std::string s;
-        s += "1,"  + std::to_string(obj->m_objectID);
-        s += ",2," + fmtFloat(obj->getPositionX());
-        s += ",3," + fmtFloat(obj->getPositionY());
+        std::vector<std::string> parts;
+        parts.push_back("1," + std::to_string(obj->m_objectID));
+        parts.push_back("2," + fmtFloat(obj->getPositionX()));
+        parts.push_back("3," + fmtFloat(obj->getPositionY()));
+        
         float rot = obj->getRotation();
         if (std::fabsf(rot) > 0.01f)
-            s += ",6," + fmtFloat(rot);
+            parts.push_back("6," + fmtFloat(rot));
+            
         float sx = obj->getScaleX(), sy = obj->getScaleY();
         if (std::fabsf(sx - 1.f) > 0.01f)
-            s += ",32," + fmtFloat(sx);
+            parts.push_back("32," + fmtFloat(sx));
         if (std::fabsf(sy - 1.f) > 0.01f)
-            s += ",33," + fmtFloat(sy);
-        // Flip
-        if (obj->m_isFlipX) s += ",4,1";
-        if (obj->m_isFlipY) s += ",5,1";
-        s += ",";
+            parts.push_back("33," + fmtFloat(sy));
+            
+        if (obj->m_isFlipX) parts.push_back("4,1");
+        if (obj->m_isFlipY) parts.push_back("5,1");
+
+        // Join parts with commas
+        std::string s;
+        for (size_t i = 0; i < parts.size(); ++i) {
+            s += parts[i] + (i == parts.size() - 1 ? "" : ",");
+        }
         result += s + ";";
     }
     return result;
@@ -409,12 +419,16 @@ void CollaborationSession::handleTcpMessage(const std::string& data, LevelEditor
         std::string objects = msg["objects"].asString().unwrapOr("");
         if (!objects.empty()) {
             m_applyingRemoteChange = true;
+            log::info("CollaborationSession: creating objects from string (length: {})", objects.length());
             // createObjectsFromString accepts a semicolon-separated list of GD object strings
             edl->createObjectsFromString(objects, true, true);
             m_applyingRemoteChange = false;
+        } else {
+            log::info("CollaborationSession: no objects in LevelInit");
         }
 
-        log::info("CollaborationSession: LevelInit applied successfully");
+        log::info("CollaborationSession: LevelInit applied successfully. Total objects: {}", 
+            edl->m_objectLayer ? edl->m_objectLayer->getChildrenCount() : 0);
 
     } catch (...) {
         log::error("CollaborationSession: exception applying LevelInit");
@@ -470,14 +484,18 @@ void CollaborationSession::applyObjectPlace(const std::string& uid, int oid,
     if (!edl || !edl->m_objectLayer) return;
 
     // Build GD object string for createObjectsFromString
+    std::vector<std::string> parts;
+    parts.push_back("1," + std::to_string(oid));
+    parts.push_back("2," + fmtFloat(x));
+    parts.push_back("3," + fmtFloat(y));
+    if (std::fabsf(rot)      > 0.01f) parts.push_back("6,"  + fmtFloat(rot));
+    if (std::fabsf(sx - 1.f) > 0.01f) parts.push_back("32," + fmtFloat(sx));
+    if (std::fabsf(sy - 1.f) > 0.01f) parts.push_back("33," + fmtFloat(sy));
+
     std::string s;
-    s += "1,"  + std::to_string(oid);
-    s += ",2," + fmtFloat(x);
-    s += ",3," + fmtFloat(y);
-    if (std::fabsf(rot)       > 0.01f) s += ",6,"  + fmtFloat(rot);
-    if (std::fabsf(sx - 1.f)  > 0.01f) s += ",32," + fmtFloat(sx);
-    if (std::fabsf(sy - 1.f)  > 0.01f) s += ",33," + fmtFloat(sy);
-    s += ",";
+    for (size_t i = 0; i < parts.size(); ++i) {
+        s += parts[i] + (i == parts.size() - 1 ? "" : ",");
+    }
 
     int before = edl->m_objectLayer->getChildrenCount();
     m_applyingRemoteChange = true;
