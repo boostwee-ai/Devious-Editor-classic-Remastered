@@ -57,17 +57,17 @@ class $modify(CollabLevelEditorLayer, LevelEditorLayer) {
     }
 
     // ── Object placement ──────────────────────────────────────────────────────
-    // Called by GD whenever an object is permanently added to the level.
-    void addObjectToLevel(GameObject* obj) {
-        LevelEditorLayer::addObjectToLevel(obj);
+    // GD 2.2081 binding: addObject(GameObject*, bool) — second arg = undo
+    void addObject(GameObject* obj) {
+        LevelEditorLayer::addObject(obj);
         // Guard: skip during init load (not yet in session) and during remote apply
         CollaborationSession::get().onLocalObjectPlaced(obj, this);
     }
 
     // ── Object deletion ───────────────────────────────────────────────────────
-    void removeObjectFromLevel(GameObject* obj) {
+    void removeObject(GameObject* obj, bool undo) {
         CollaborationSession::get().onLocalObjectRemoved(obj);
-        LevelEditorLayer::removeObjectFromLevel(obj);
+        LevelEditorLayer::removeObject(obj, undo);
     }
 };
 

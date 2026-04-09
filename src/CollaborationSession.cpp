@@ -239,13 +239,12 @@ CachedLevelSettings CollaborationSession::readLevelSettings(LevelEditorLayer* ed
     CachedLevelSettings s{};
     if (!edl) return s;
 
-    // TODO: verify exact field names against current Geode bindings.
-    // LevelEditorLayer::m_levelSettings is a LevelSettingsObject*.
+    // Field names verified against Geode SDK / GD 2.2081 bindings:
     auto* ls = edl->m_levelSettings;
     if (!ls) return s;
 
-    s.bg         = ls->m_background;
-    s.ground     = ls->m_ground;
+    s.bg         = ls->m_startBG;
+    s.ground     = ls->m_startGround;
     s.speed      = static_cast<int>(ls->m_startSpeed);
     s.gameMode   = static_cast<int>(ls->m_startMode);
     s.platformer = ls->m_platformerMode;
@@ -258,10 +257,10 @@ void CollaborationSession::applyLevelSettings(const CachedLevelSettings& s, Leve
     auto* ls = edl->m_levelSettings;
     if (!ls) return;
 
-    ls->m_background    = s.bg;
-    ls->m_ground        = s.ground;
+    ls->m_startBG       = s.bg;
+    ls->m_startGround   = s.ground;
     ls->m_startSpeed    = static_cast<Speed>(s.speed);
-    ls->m_startMode     = static_cast<PlayerGamemode>(s.gameMode);
+    ls->m_startMode     = static_cast<PlayerMode>(s.gameMode);
     ls->m_platformerMode = s.platformer;
     ls->m_twoPlayerMode = s.twoPlayer;
     m_lastSettings = s;
@@ -293,9 +292,8 @@ std::string CollaborationSession::serializeAllObjects(LevelEditorLayer* edl) {
     auto* children = edl->m_objectLayer->getChildren();
     if (!children) return "";
 
-    CCObject* raw;
-    CCARRAY_FOREACH(children, raw) {
-        auto* obj = dynamic_cast<GameObject*>(raw);
+    // CCARRAY_FOREACH removed in Geode v5 — use CCArrayExt range-for instead
+    for (auto* obj : CCArrayExt<GameObject*>(children)) {
         if (!obj) continue;
         // Skip cursor indicator nodes (added by us, not real objects)
         if (obj->getTag() >= CURSOR_BASE_TAG && obj->getTag() < CURSOR_BASE_TAG + 10) continue;
@@ -377,9 +375,7 @@ void CollaborationSession::handleTcpMessage(const std::string& data, LevelEditor
             std::vector<GameObject*> toRemove;
             auto* children = edl->m_objectLayer->getChildren();
             if (children) {
-                CCObject* raw;
-                CCARRAY_FOREACH(children, raw) {
-                    auto* obj = dynamic_cast<GameObject*>(raw);
+                for (auto* obj : CCArrayExt<GameObject*>(children)) {
                     if (obj && (obj->getTag() < CURSOR_BASE_TAG || obj->getTag() >= CURSOR_BASE_TAG + 10))
                         toRemove.push_back(obj);
                 }
@@ -387,7 +383,7 @@ void CollaborationSession::handleTcpMessage(const std::string& data, LevelEditor
             m_applyingRemoteChange = true;
             for (auto* obj : toRemove) {
                 m_objectToUid.erase(obj);
-                edl->removeObjectFromLevel(obj);
+                edl->removeObject(obj, true);
             }
             m_applyingRemoteChange = false;
             m_uidToObject.clear();
@@ -493,7 +489,7 @@ void CollaborationSession::applyObjectDelete(const std::string& uid, LevelEditor
     m_uidToObject.erase(it);
 
     m_applyingRemoteChange = true;
-    edl->removeObjectFromLevel(obj);
+    edl->removeObject(obj, true); // removeObject(obj, undo) is the correct GD 2.2 API
     m_applyingRemoteChange = false;
 }
 
