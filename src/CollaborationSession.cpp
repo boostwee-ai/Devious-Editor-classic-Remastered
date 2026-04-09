@@ -243,10 +243,10 @@ CachedLevelSettings CollaborationSession::readLevelSettings(LevelEditorLayer* ed
     auto* ls = edl->m_levelSettings;
     if (!ls) return s;
 
-    s.bg         = ls->m_startBG;
-    s.ground     = ls->m_startGround;
+    s.bg         = ls->m_backgroundIndex;
+    s.ground     = ls->m_groundIndex;
     s.speed      = static_cast<int>(ls->m_startSpeed);
-    s.gameMode   = static_cast<int>(ls->m_startMode);
+    s.gameMode   = ls->m_startMode;
     s.platformer = ls->m_platformerMode;
     s.twoPlayer  = ls->m_twoPlayerMode;
     return s;
@@ -257,12 +257,12 @@ void CollaborationSession::applyLevelSettings(const CachedLevelSettings& s, Leve
     auto* ls = edl->m_levelSettings;
     if (!ls) return;
 
-    ls->m_startBG       = s.bg;
-    ls->m_startGround   = s.ground;
-    ls->m_startSpeed    = static_cast<Speed>(s.speed);
-    ls->m_startMode     = static_cast<PlayerMode>(s.gameMode);
-    ls->m_platformerMode = s.platformer;
-    ls->m_twoPlayerMode = s.twoPlayer;
+    ls->m_backgroundIndex = s.bg;
+    ls->m_groundIndex     = s.ground;
+    ls->m_startSpeed      = static_cast<Speed>(s.speed);
+    ls->m_startMode       = s.gameMode;
+    ls->m_platformerMode  = s.platformer;
+    ls->m_twoPlayerMode   = s.twoPlayer;
     m_lastSettings = s;
 }
 

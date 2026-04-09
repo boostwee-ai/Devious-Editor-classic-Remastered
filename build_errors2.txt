@@ -1,0 +1,1394 @@
+﻿Build for macOS	Build the mod	∩╗┐2026-04-09T01:04:52.2315420Z ##[group]Run geode-sdk/build-geode-mod@main
+Build for macOS	Build the mod	2026-04-09T01:04:52.2315680Z with:
+Build for macOS	Build the mod	2026-04-09T01:04:52.2315860Z   configure-args: -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+Build for macOS	Build the mod	2026-04-09T01:04:52.2316070Z   sdk: given
+Build for macOS	Build the mod	2026-04-09T01:04:52.2316190Z   cli: latest
+Build for macOS	Build the mod	2026-04-09T01:04:52.2316320Z   build-config: Release
+Build for macOS	Build the mod	2026-04-09T01:04:52.2316470Z   path: ./
+Build for macOS	Build the mod	2026-04-09T01:04:52.2316590Z   combine: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.2316730Z   bindings: geode-sdk/bindings
+Build for macOS	Build the mod	2026-04-09T01:04:52.2316890Z   android-min-sdk: 23
+Build for macOS	Build the mod	2026-04-09T01:04:52.2317040Z   ccache-variant: default
+Build for macOS	Build the mod	2026-04-09T01:04:52.2317200Z   use-cpm-cache: true
+Build for macOS	Build the mod	2026-04-09T01:04:52.2317340Z   export-pdb: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.2317460Z   export-debug: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.2317600Z   use-lto: true
+Build for macOS	Build the mod	2026-04-09T01:04:52.2317730Z   bundle-pdb: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.2317890Z   export-symbols: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.2318030Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:52.2318160Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:52.2318330Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:52.2393370Z ##[group]Run DEFAULT_TARGET=Win64
+Build for macOS	Build the mod	2026-04-09T01:04:52.2393680Z [36;1mDEFAULT_TARGET=Win64[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2393880Z [36;1mDEFAULT_CCACHE=sccache[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2394170Z [36;1mif [ "$RUNNER_OS" = "Linux" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2394480Z [36;1m  ID=linux[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2394660Z [36;1m  DEFAULT_TARGET=Android64[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2394920Z [36;1melif [ "$RUNNER_OS" = "Windows" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2395130Z [36;1m  ID=win[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2395280Z [36;1m  DEFAULT_TARGET=Win64[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2395490Z [36;1melif [ "$RUNNER_OS" = "macOS" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2395700Z [36;1m  ID=mac[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2395850Z [36;1m  DEFAULT_TARGET=MacOS[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2396100Z [36;1m  DEFAULT_CCACHE=[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2396260Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2396400Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2396650Z [36;1mCCACHE_VARIANT=default[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2396890Z [36;1mif [ "$CCACHE_VARIANT" = "default" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2397260Z [36;1m  CCACHE_VARIANT=$DEFAULT_CCACHE[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2397450Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2397670Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2397800Z [36;1mTARGET=[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2398010Z [36;1mif [ "$TARGET" = "" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2398260Z [36;1m  TARGET=$DEFAULT_TARGET[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2398500Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2409810Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2409970Z [36;1mif [ "$TARGET" = "Android32" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2410180Z [36;1m  OUTPUT_ID=android32[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2410380Z [36;1melif [ "$TARGET" = "Android64" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2410580Z [36;1m  OUTPUT_ID=android64[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2410780Z [36;1melif [ "$TARGET" = "Win64" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2410990Z [36;1m  OUTPUT_ID=win[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2411200Z [36;1melif [ "$TARGET" = "MacOS" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2411860Z [36;1m  OUTPUT_ID=mac[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2412030Z [36;1melif [ "$TARGET" = "iOS" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2412220Z [36;1m  OUTPUT_ID=ios[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2412370Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2412490Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2412620Z [36;1mecho "id=$ID" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2412830Z [36;1mecho "target=$TARGET" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2413170Z [36;1mecho "target_id=$OUTPUT_ID" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2413450Z [36;1mecho "ccache_variant=$CCACHE_VARIANT" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:04:52.2453890Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Build for macOS	Build the mod	2026-04-09T01:04:52.2454250Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:52.2454410Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:52.2454600Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:52.5604380Z ##[group]Run actions/cache@v4
+Build for macOS	Build the mod	2026-04-09T01:04:52.5604670Z with:
+Build for macOS	Build the mod	2026-04-09T01:04:52.5605020Z   path: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache
+Build for macOS	Build the mod	2026-04-09T01:04:52.5605670Z   key: cpm-mac-v1-8099eb9cfdf046aebc828817217b02867d1559c0b2448b0cdc3e1ce355c38732
+Build for macOS	Build the mod	2026-04-09T01:04:52.5606600Z   restore-keys: cpm-mac-v1-
+Build for macOS	Build the mod	
+Build for macOS	Build the mod	2026-04-09T01:04:52.5606810Z   enableCrossOsArchive: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.5606990Z   fail-on-cache-miss: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.5607170Z   lookup-only: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.5607320Z   save-always: false
+Build for macOS	Build the mod	2026-04-09T01:04:52.5607480Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:52.5607640Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:52.5607840Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:52.6820850Z (node:3329) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Build for macOS	Build the mod	2026-04-09T01:04:52.6821700Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build for macOS	Build the mod	2026-04-09T01:04:52.8328730Z Cache hit for: cpm-mac-v1-8099eb9cfdf046aebc828817217b02867d1559c0b2448b0cdc3e1ce355c38732
+Build for macOS	Build the mod	2026-04-09T01:04:52.8401390Z (node:3329) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Build for macOS	Build the mod	2026-04-09T01:04:53.4842870Z Received 5734429 of 5734429 (100.0%), 10.9 MBs/sec
+Build for macOS	Build the mod	2026-04-09T01:04:53.4848960Z Cache Size: ~5 MB (5734429 B)
+Build for macOS	Build the mod	2026-04-09T01:04:53.4881430Z [command]/opt/homebrew/bin/gtar -xf /Users/runner/work/_temp/1b3cbbc8-483b-4b8a-ba48-61c1d8e00f5d/cache.tzst -P -C /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered --delay-directory-restore --use-compress-program unzstd
+Build for macOS	Build the mod	2026-04-09T01:04:53.5937480Z Cache restored successfully
+Build for macOS	Build the mod	2026-04-09T01:04:53.6151770Z Cache restored from key: cpm-mac-v1-8099eb9cfdf046aebc828817217b02867d1559c0b2448b0cdc3e1ce355c38732
+Build for macOS	Build the mod	2026-04-09T01:04:53.6235490Z ##[group]Run curl -L https://github.com/ninja-build/ninja/releases/latest/download/ninja-mac.zip -o ninja.zip
+Build for macOS	Build the mod	2026-04-09T01:04:53.6236080Z [36;1mcurl -L https://github.com/ninja-build/ninja/releases/latest/download/ninja-mac.zip -o ninja.zip[0m
+Build for macOS	Build the mod	2026-04-09T01:04:53.6236490Z [36;1m7z x ninja.zip -o"$GITHUB_WORKSPACE/ninja"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:53.6236750Z [36;1mecho "$GITHUB_WORKSPACE/ninja" >> $GITHUB_PATH[0m
+Build for macOS	Build the mod	2026-04-09T01:04:53.6273020Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Build for macOS	Build the mod	2026-04-09T01:04:53.6273250Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:53.6273400Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:53.6273600Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:53.6678070Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+Build for macOS	Build the mod	2026-04-09T01:04:53.6680210Z                                  Dload  Upload   Total   Spent    Left  Speed
+Build for macOS	Build the mod	2026-04-09T01:04:53.6680500Z 
+Build for macOS	Build the mod	2026-04-09T01:04:53.9485220Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+Build for macOS	Build the mod	2026-04-09T01:04:53.9585940Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+Build for macOS	Build the mod	2026-04-09T01:04:54.1259580Z 
+Build for macOS	Build the mod	2026-04-09T01:04:54.1360740Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+Build for macOS	Build the mod	2026-04-09T01:04:54.2041560Z 
+Build for macOS	Build the mod	2026-04-09T01:04:54.2042310Z 100  306k  100  306k    0     0   571k      0 --:--:-- --:--:-- --:--:--  571k
+Build for macOS	Build the mod	2026-04-09T01:04:54.2284890Z 
+Build for macOS	Build the mod	2026-04-09T01:04:54.2285540Z 7-Zip [64] 17.05 : Copyright (c) 1999-2021 Igor Pavlov : 2017-08-28
+Build for macOS	Build the mod	2026-04-09T01:04:54.2285970Z p7zip Version 17.05 (locale=utf8,Utf16=on,HugeFiles=on,64 bits,3 CPUs LE)
+Build for macOS	Build the mod	2026-04-09T01:04:54.2286240Z 
+Build for macOS	Build the mod	2026-04-09T01:04:54.2286320Z Scanning the drive for archives:
+Build for macOS	Build the mod	2026-04-09T01:04:54.2286570Z 1 file, 314051 bytes (307 KiB)
+Build for macOS	Build the mod	2026-04-09T01:04:54.2286760Z 
+Build for macOS	Build the mod	2026-04-09T01:04:54.2286830Z Extracting archive: ninja.zip
+Build for macOS	Build the mod	2026-04-09T01:04:54.2344140Z --
+Build for macOS	Build the mod	2026-04-09T01:04:54.2344410Z Path = ninja.zip
+Build for macOS	Build the mod	2026-04-09T01:04:54.2344570Z Type = zip
+Build for macOS	Build the mod	2026-04-09T01:04:54.2344730Z Physical Size = 314051
+Build for macOS	Build the mod	2026-04-09T01:04:54.2344850Z 
+Build for macOS	Build the mod	2026-04-09T01:04:54.2345380Z Everything is Ok
+Build for macOS	Build the mod	2026-04-09T01:04:54.2345530Z 
+Build for macOS	Build the mod	2026-04-09T01:04:54.2345660Z Size:       828128
+Build for macOS	Build the mod	2026-04-09T01:04:54.2346010Z Compressed: 314051
+Build for macOS	Build the mod	2026-04-09T01:04:54.2410560Z ##[group]Run geode-sdk/cli/.github/actions/setup@main
+Build for macOS	Build the mod	2026-04-09T01:04:54.2411350Z with:
+Build for macOS	Build the mod	2026-04-09T01:04:54.2411750Z   version: latest
+Build for macOS	Build the mod	2026-04-09T01:04:54.2411940Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:54.2412090Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:54.2412290Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:54.2428550Z ##[group]Run if [ "$RUNNER_OS" = "Linux" ]; then
+Build for macOS	Build the mod	2026-04-09T01:04:54.2428850Z [36;1mif [ "$RUNNER_OS" = "Linux" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:54.2429090Z [36;1m  echo "host=linux" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:04:54.2429340Z [36;1melif [ "$RUNNER_OS" = "Windows" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:54.2429590Z [36;1m  echo "host=win" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:04:54.2429830Z [36;1melif [ "$RUNNER_OS" = "macOS" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:54.2430070Z [36;1m  echo "host=mac" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:04:54.2430270Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:04:54.2461150Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Build for macOS	Build the mod	2026-04-09T01:04:54.2461410Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:54.2461560Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:54.2461770Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:54.2803070Z ##[group]Run robinraju/release-downloader@v1.10
+Build for macOS	Build the mod	2026-04-09T01:04:54.2803340Z with:
+Build for macOS	Build the mod	2026-04-09T01:04:54.2803470Z   repository: geode-sdk/cli
+Build for macOS	Build the mod	2026-04-09T01:04:54.2803610Z   latest: true
+Build for macOS	Build the mod	2026-04-09T01:04:54.2803740Z   fileName: *-mac.zip
+Build for macOS	Build the mod	2026-04-09T01:04:54.2803870Z   tarBall: false
+Build for macOS	Build the mod	2026-04-09T01:04:54.2803990Z   zipBall: false
+Build for macOS	Build the mod	2026-04-09T01:04:54.2804140Z   out-file-path: my-epic-geode-cli
+Build for macOS	Build the mod	2026-04-09T01:04:54.2804310Z   preRelease: false
+Build for macOS	Build the mod	2026-04-09T01:04:54.2804440Z   extract: false
+Build for macOS	Build the mod	2026-04-09T01:04:54.2804640Z   token: ***
+Build for macOS	Build the mod	2026-04-09T01:04:54.2804790Z   github-api-url: https://api.github.com
+Build for macOS	Build the mod	2026-04-09T01:04:54.2804980Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:54.2805120Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:54.2805320Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:54.3658470Z Fetching latest release for repo geode-sdk/cli
+Build for macOS	Build the mod	2026-04-09T01:04:54.3740280Z (node:3343) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Build for macOS	Build the mod	2026-04-09T01:04:54.3741480Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build for macOS	Build the mod	2026-04-09T01:04:54.7519740Z Found latest release version: v3.7.4
+Build for macOS	Build the mod	2026-04-09T01:04:54.7523170Z Downloading file: geode-cli-v3.7.4-mac.zip to: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/my-epic-geode-cli
+Build for macOS	Build the mod	2026-04-09T01:04:55.0693920Z Done: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/my-epic-geode-cli/geode-cli-v3.7.4-mac.zip
+Build for macOS	Build the mod	2026-04-09T01:04:55.0780910Z ##[group]Run 7z x "my-epic-geode-cli/*-mac.zip" -omy-epic-geode-cli
+Build for macOS	Build the mod	2026-04-09T01:04:55.0781450Z [36;1m7z x "my-epic-geode-cli/*-mac.zip" -omy-epic-geode-cli[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.0781820Z [36;1mchmod +x my-epic-geode-cli/geode[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.0782130Z [36;1mecho "$GITHUB_WORKSPACE/my-epic-geode-cli" >> $GITHUB_PATH[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.0817760Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Build for macOS	Build the mod	2026-04-09T01:04:55.0818090Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:55.0818270Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:55.0818530Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:55.1108570Z 
+Build for macOS	Build the mod	2026-04-09T01:04:55.1109690Z 7-Zip [64] 17.05 : Copyright (c) 1999-2021 Igor Pavlov : 2017-08-28
+Build for macOS	Build the mod	2026-04-09T01:04:55.1110330Z p7zip Version 17.05 (locale=utf8,Utf16=on,HugeFiles=on,64 bits,3 CPUs LE)
+Build for macOS	Build the mod	2026-04-09T01:04:55.1110960Z 
+Build for macOS	Build the mod	2026-04-09T01:04:55.1111240Z Scanning the drive for archives:
+Build for macOS	Build the mod	2026-04-09T01:04:55.1111710Z 1 file, 8454422 bytes (8257 KiB)
+Build for macOS	Build the mod	2026-04-09T01:04:55.1112070Z 
+Build for macOS	Build the mod	2026-04-09T01:04:55.1112320Z Extracting archive: my-epic-geode-cli/geode-cli-v3.7.4-mac.zip
+Build for macOS	Build the mod	2026-04-09T01:04:55.2607890Z --
+Build for macOS	Build the mod	2026-04-09T01:04:55.2639010Z Path = my-epic-geode-cli/geode-cli-v3.7.4-mac.zip
+Build for macOS	Build the mod	2026-04-09T01:04:55.2646940Z Type = zip
+Build for macOS	Build the mod	2026-04-09T01:04:55.2651800Z Physical Size = 8454422
+Build for macOS	Build the mod	2026-04-09T01:04:55.2652690Z 
+Build for macOS	Build the mod	2026-04-09T01:04:55.2653360Z Everything is Ok
+Build for macOS	Build the mod	2026-04-09T01:04:55.2658990Z 
+Build for macOS	Build the mod	2026-04-09T01:04:55.2659300Z Size:       21134952
+Build for macOS	Build the mod	2026-04-09T01:04:55.2667700Z Compressed: 8454422
+Build for macOS	Build the mod	2026-04-09T01:04:55.2704170Z ##[group]Run export CLI_PROFILE="/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cli-profile"
+Build for macOS	Build the mod	2026-04-09T01:04:55.2705000Z [36;1mexport CLI_PROFILE="/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cli-profile"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2705480Z [36;1m# for windows[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2705680Z [36;1mmkdir -p "$CLI_PROFILE/geode/mods"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2705910Z [36;1m# for mac[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2706100Z [36;1mmkdir -p "$CLI_PROFILE/Contents/geode/mods"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2706450Z [36;1mgeode profile add --name GithubActions "$CLI_PROFILE/GeometryDash.exe" win[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2706780Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2707210Z [36;1mgeode sdk install "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2707710Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2707900Z [36;1m# silly github actions wont refresh the env[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2708420Z [36;1mexport GEODE_SDK="/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2708920Z [36;1mecho "GEODE_SDK=$GEODE_SDK" >> $GITHUB_ENV[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2709150Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2709300Z [36;1mif [ "given" == "nightly" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2709520Z [36;1m  geode sdk update nightly[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2709770Z [36;1m  geode sdk install-binaries --platform mac[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2710020Z [36;1melif [ "given" == "latest" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2710250Z [36;1m  geode sdk update stable[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2710480Z [36;1m  geode sdk install-binaries --platform mac[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2710740Z [36;1melif [ "given" == "given" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2711160Z [36;1m  export MOD_JSON_PATH=$(find . -name "mod.json" -not -path "./geode-sdk-clone/*" -print | sort -r | head -n 1)[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2711650Z [36;1m  export TARGET_GEODE_VERSION=$(jq -r '.geode' $MOD_JSON_PATH)[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2712050Z [36;1m  echo "Updating to version $TARGET_GEODE_VERSION from $MOD_JSON_PATH"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2712390Z [36;1m  geode sdk update "$TARGET_GEODE_VERSION"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2712740Z [36;1m  geode sdk install-binaries --platform mac --version "$TARGET_GEODE_VERSION"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2713060Z [36;1melse[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2713210Z [36;1m  geode sdk update given[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2713460Z [36;1m  geode sdk install-binaries --platform mac[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2713680Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2713990Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2714620Z [36;1mexport CPM_CACHE="/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache"[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2715130Z [36;1mecho "CPM_SOURCE_CACHE=$CPM_CACHE" >> $GITHUB_ENV[0m
+Build for macOS	Build the mod	2026-04-09T01:04:55.2745490Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Build for macOS	Build the mod	2026-04-09T01:04:55.2745740Z env:
+Build for macOS	Build the mod	2026-04-09T01:04:55.2745970Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:04:55.2746230Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:04:57.6501440Z | Done | A new profile named 'GithubActions' has been created
+Build for macOS	Build the mod	2026-04-09T01:04:57.7039180Z | Info | Downloading SDK
+Build for macOS	Build the mod	2026-04-09T01:04:58.8707490Z | Info | Enumerating objects: 58645, done.
+Build for macOS	Build the mod	2026-04-09T01:04:58.8809100Z | Info | Counting objects:   0% (1/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.8912320Z | Info | Counting objects:   1% (5/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9018420Z | Info | Counting objects:   2% (10/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9119800Z | Info | Counting objects:   3% (14/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9221940Z | Info | Counting objects:   4% (19/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9322610Z | Info | Counting objects:   5% (24/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9426790Z | Info | Counting objects:   6% (28/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9428250Z Counting objects:   7% (33/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9429210Z | Info | Counting objects:   8% (38/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9429650Z Counting objects:   9% (42/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9431090Z | Info | Counting objects:  10% (47/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9431550Z Counting objects:  11% (52/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9431980Z | Info | Counting objects:  12% (56/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9432360Z Counting objects:  13% (61/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9432820Z | Info | Counting objects:  14% (66/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9433280Z Counting objects:  15% (70/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9433670Z | Info | Counting objects:  16% (75/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9434740Z Counting objects:  17% (80/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9435740Z | Info | Counting objects:  18% (84/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9436190Z | Info | Counting objects:  19% (89/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9436690Z Counting objects:  20% (93/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9437230Z | Info | Counting objects:  21% (98/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9437720Z | Info | Counting objects:  22% (103/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9438200Z Counting objects:  23% (107/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9438530Z | Info | Counting objects:  24% (112/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9438850Z Counting objects:  25% (117/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9465210Z Counting objects:  26% (121/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9465720Z | Info | Counting objects:  27% (126/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9466150Z Counting objects:  28% (131/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9466520Z Counting objects:  29% (135/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9466990Z | Info | Counting objects:  30% (140/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9467450Z Counting objects:  31% (145/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9467860Z | Info | Counting objects:  32% (149/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9468250Z Counting objects:  33% (154/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9468600Z Counting objects:  34% (159/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9469010Z | Info | Counting objects:  35% (163/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9469420Z Counting objects:  36% (168/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9469840Z | Info | Counting objects:  37% (173/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9470210Z Counting objects:  38% (177/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9470520Z | Info | Counting objects:  39% (182/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9470890Z Counting objects:  40% (186/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9471240Z Counting objects:  41% (191/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9471450Z | Info | Counting objects:  42% (196/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9471730Z Counting objects:  43% (200/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9472090Z Counting objects:  44% (205/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9472400Z | Info | Counting objects:  45% (210/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9472690Z Counting objects:  46% (214/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9472980Z Counting objects:  47% (219/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9473250Z Counting objects:  48% (224/4| Info | 65)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9473520Z Counting objects:  49% (228/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9473830Z Counting objects:  50% (233/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9474060Z Counting objects:  51% (238/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9474300Z | Info | Counting objects:  52% (242/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9474610Z Counting objects:  53% (247/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9474840Z Counting objects:  54% (252/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9477410Z | Info | Counting objects:  55% (256/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9477720Z Counting objects:  56% (261/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9477980Z Counting objects:  57% (266/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9478210Z | Info | Counting objects:  58% (270/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9478510Z Counting objects:  59% (275/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9478740Z Counting objects:  60% (279/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9478980Z | Info | Counting objects:  61% (284/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9479290Z Counting objects:  62% (289/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9479520Z Counting objects:  63% (293/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9479760Z | Info | Counting objects:  64% (298/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9480000Z Counting objects:  65% (303/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9480230Z Counting objects:  66% (307/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9480450Z | Info | Counting objects:  67% (312/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9480690Z Counting objects:  68% (317/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9480950Z | Info | Counting objects:  69% (321/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9481280Z Counting objects:  70% (326/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9481540Z Counting objects:  71% (331/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9481720Z | Info | Counting objects:  72% (335/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9482300Z | Info | Counting objects:  73% (340/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9482570Z | Info | Counting objects:  74% (345/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9482870Z Counting objects:  75% (349/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9483090Z | Info | Counting objects:  76% (354/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9483330Z Counting objects:  77% (359/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9483620Z Counting objects:  78% (363/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9483800Z | Info | Counting objects:  79% (368/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9484060Z Counting objects:  80% (372/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9484240Z Counting objects:  81% (377/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9484410Z | Info | Counting objects:  82% (382/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9484600Z Counting objects:  83% (386/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9484820Z | Info | Counting objects:  84% (391/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9485010Z Counting objects:  85% (396/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9485290Z Counting objects:  86% (400/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9485580Z | Info | Counting objects:  87% (405/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9485780Z Counting objects:  88% (410/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9486030Z | Info | Counting objects:  89% (414/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9486420Z Counting objects:  90% (419/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9486630Z Counting objects:  91% (424/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9486830Z | Info | Counting objects:  92% (428/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9487050Z Counting objects:  93% (433/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9487210Z Counting objects:  94% (438/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9487390Z Counting objects:  95% (442/4| Info | 65)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9487620Z Counting objects:  96% (447/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9487890Z | Info | Counting objects:  97% (452/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9488080Z Counting objects:  98% (456/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9488300Z Counting objects:  99% (461/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9488580Z | Info | Counting objects: 100% (465/465)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9488870Z | Info | Counting objects: 100% (465/465), done.
+Build for macOS	Build the mod	2026-04-09T01:04:58.9489130Z | Info | Compressing objects:   0% (1/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9489400Z Compressing objects:   1% (2/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9489670Z | Info | Compressing objects:   2% (4/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9489880Z | Info | Compressing objects:   3% (6/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9490130Z | Info | Compressing objects:   4% (8/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9490420Z | Info | Compressing objects:   5% (9/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9490690Z | Info | Compressing objects:   6% (11/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9490960Z | Info | Compressing objects:   7% (13/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9491290Z | Info | Compressing objects:   8% (15/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9491510Z | Info | Compressing objects:   9% (17/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9491720Z | Info | Compressing objects:  10% (18/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9492040Z | Info | Compressing objects:  11% (20/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9492260Z | Info | Compressing objects:  12% (22/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9492460Z | Info | Compressing objects:  13% (24/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9493120Z | Info | Compressing objects:  14% (25/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9493390Z | Info | Compressing objects:  15% (27/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9493660Z | Info | Compressing objects:  16% (29/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9494290Z | Info | Compressing objects:  17% (31/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9494670Z | Info | Compressing objects:  18% (33/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9495020Z | Info | Compressing objects:  19% (34/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9495300Z | Info | Compressing objects:  20% (36/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9495560Z Compressing objects:  21% (38/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9495880Z | Info | Compressing objects:  22% (40/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9496150Z | Info | Compressing objects:  23% (41/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9496420Z | Info | Compressing objects:  24% (43/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9496760Z | Info | Compressing objects:  25% (45/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9497240Z | Info | Compressing objects:  26% (47/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9497730Z | Info | Compressing objects:  27% (49/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9498020Z | Info | Compressing objects:  28% (50/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9498310Z | Info | Compressing objects:  29% (52/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9498820Z | Info | Compressing objects:  30% (54/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9499040Z | Info | Compressing objects:  31% (56/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9499310Z | Info | Compressing objects:  32% (57/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9499640Z | Info | Compressing objects:  33% (59/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9499930Z | Info | Compressing objects:  34% (61/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9500610Z | Info | Compressing objects:  35% (63/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9500910Z | Info | Compressing objects:  36% (65/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9501270Z | Info | Compressing objects:  37% (66/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9501480Z | Info | Compressing objects:  38% (68/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9501680Z | Info | Compressing objects:  39% (70/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9503070Z | Info | Compressing objects:  40% (72/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9503350Z | Info | Compressing objects:  41% (73/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9503740Z | Info | Compressing objects:  42% (75/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9505520Z | Info | Compressing objects:  43% (77/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9505830Z | Info | Compressing objects:  44% (79/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9506120Z | Info | Compressing objects:  45% (81/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9506590Z | Info | Compressing objects:  46% (82/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9506860Z | Info | Compressing objects:  47% (84/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9507140Z | Info | Compressing objects:  48% (86/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9507440Z | Info | Compressing objects:  49% (88/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9507680Z | Info | Compressing objects:  50% (89/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9507890Z | Info | Compressing objects:  51% (91/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9508110Z | Info | Compressing objects:  52% (93/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9508310Z | Info | Compressing objects:  53% (95/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9509630Z | Info | Compressing objects:  54% (97/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9510220Z | Info | Compressing objects:  55% (98/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9511170Z | Info | Compressing objects:  56% (100/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9511550Z | Info | Compressing objects:  57% (102/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9512040Z | Info | Compressing objects:  58% (104/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9512300Z | Info | Compressing objects:  59% (106/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9512720Z | Info | Compressing objects:  60% (107/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9514460Z | Info | Compressing objects:  61% (109/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9515090Z | Info | Compressing objects:  62% (111/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9515390Z | Info | Compressing objects:  63% (113/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9515670Z | Info | Compressing objects:  64% (114/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9515940Z | Info | Compressing objects:  65% (116/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9516210Z | Info | Compressing objects:  66% (118/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9516480Z | Info | Compressing objects:  67% (120/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9516710Z | Info | Compressing objects:  68% (122/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9516920Z | Info | Compressing objects:  69% (123/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9517550Z | Info | Compressing objects:  70% (125/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9517770Z | Info | Compressing objects:  71% (127/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9518000Z | Info | Compressing objects:  72% (129/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9518220Z | Info | Compressing objects:  73% (130/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9518460Z | Info | Compressing objects:  74% (132/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9518680Z | Info | Compressing objects:  75% (134/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9518900Z | Info | Compressing objects:  76% (136/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9519200Z | Info | Compressing objects:  77% (138/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9519610Z | Info | Compressing objects:  78% (139/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9519850Z | Info | Compressing objects:  79% (141/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9520120Z | Info | Compressing objects:  80% (143/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9520730Z | Info | Compressing objects:  81% (145/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9521300Z | Info | Compressing objects:  82% (146/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9521610Z | Info | Compressing objects:  83% (148/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9521890Z | Info | Compressing objects:  84% (150/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9522200Z | Info | Compressing objects:  85% (152/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9522710Z | Info | Compressing objects:  86% (154/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9523040Z | Info | Compressing objects:  87% (155/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9523330Z | Info | Compressing objects:  88% (157/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9523620Z | Info | Compressing objects:  89% (159/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9523960Z | Info | Compressing objects:  90% (161/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9524260Z Compressing objects:  91% (162/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9524470Z | Info | Compressing objects:  92% (164/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9524740Z | Info | Compressing objects:  93% (166/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9524990Z | Info | Compressing objects:  94% (168/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9525200Z | Info | Compressing objects:  95% (170/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9525430Z | Info | Compressing objects:  96% (171/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9525770Z | Info | Compressing objects:  97% (173/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9526130Z | Info | Compressing objects:  98% (175/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9526460Z | Info | Compressing objects:  99% (177/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9526680Z | Info | Compressing objects: 100% (178/178)
+Build for macOS	Build the mod	2026-04-09T01:04:58.9527030Z | Info | Compressing objects: 100% (178/178), done.
+Build for macOS	Build the mod	2026-04-09T01:05:10.0764320Z | Info | Total 58645 (delta 388), reused 296 (delta 287), pack-reused 58180 (from 3)
+Build for macOS	Build the mod	2026-04-09T01:05:15.3515800Z | Warn | You may have to restart your terminal application for the environment variable changes to go into effect
+Build for macOS	Build the mod	2026-04-09T01:05:15.3517180Z | Info | Set GEODE_SDK environment variable automatically
+Build for macOS	Build the mod	2026-04-09T01:05:15.9146620Z | Info | Updating head
+Build for macOS	Build the mod	2026-04-09T01:05:16.0224490Z | Done | Updated head to v5.5.3
+Build for macOS	Build the mod	2026-04-09T01:05:16.0224870Z | Done | Successfully installed SDK
+Build for macOS	Build the mod	2026-04-09T01:05:16.0226000Z | Info | Please restart your command line to have the GEODE_SDK enviroment variable set.
+Build for macOS	Build the mod	2026-04-09T01:05:16.0228670Z | Info | Use `geode sdk install-binaries` to install pre-built binaries
+Build for macOS	Build the mod	2026-04-09T01:05:16.0797850Z Updating to version 5.5.3 from ./mod.json
+Build for macOS	Build the mod	2026-04-09T01:05:16.1465070Z | Info | Switching to 5.5.3
+Build for macOS	Build the mod	2026-04-09T01:05:16.1466640Z | Info | Updating SDK
+Build for macOS	Build the mod	2026-04-09T01:05:16.7231940Z | Info | Updating head
+Build for macOS	Build the mod	2026-04-09T01:05:16.8579160Z | Info | Switched to 5.5.3
+Build for macOS	Build the mod	2026-04-09T01:05:16.8583300Z | Done | Successfully updated SDK.
+Build for macOS	Build the mod	2026-04-09T01:05:16.9229560Z | Info | Installing binaries for 5.5.3
+Build for macOS	Build the mod	2026-04-09T01:05:17.4312690Z | Info | Found binaries for platform MacOS
+Build for macOS	Build the mod	2026-04-09T01:05:17.4315780Z | Info | Downloading
+Build for macOS	Build the mod	2026-04-09T01:05:18.1815390Z | Done | Binaries installed
+Build for macOS	Build the mod	2026-04-09T01:05:18.1889000Z ##[group]Run mkdir -p $HOME/.cache
+Build for macOS	Build the mod	2026-04-09T01:05:18.1889520Z [36;1mmkdir -p $HOME/.cache[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1889750Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1889970Z [36;1mNDK_PATH="/usr/local/lib/android/sdk/ndk/"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1890340Z [36;1mif [ "" = "" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1890580Z [36;1m  NDK_PATH="$ANDROID_NDK_LATEST_HOME"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1897870Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1898100Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1898290Z [36;1mcd "./"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1898560Z [36;1mCMAKE_EXTRA_ARGS=""[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1898990Z [36;1mif [ mac = "mac" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1899590Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 -DGEODE_DISABLE_PRECOMPILED_HEADERS=OFF -DCMAKE_AR='/usr/bin/ar' -DCMAKE_RANLIB='/usr/bin/ranlib'"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1900440Z [36;1melif [ mac = "android32" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1901110Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake -DANDROID_STL=c++_shared -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-23"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1901780Z [36;1melif [ mac = "android64" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1917270Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake -DANDROID_STL=c++_shared -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-23"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1917930Z [36;1melif [ mac = "ios" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1918390Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_SYSTEM_NAME=iOS -DGEODE_TARGET_PLATFORM=iOS -DGEODE_DISABLE_PRECOMPILED_HEADERS=OFF"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1925280Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1925470Z [36;1mif [ "true" = "true" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1925840Z [36;1m  CMAKE_EXTRA_ARGS="$CMAKE_EXTRA_ARGS -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1926250Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1926480Z [36;1mif [ "false" = "true" ] && [ mac = "win" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1926840Z [36;1m  CMAKE_EXTRA_ARGS="$CMAKE_EXTRA_ARGS -DGEODE_BUNDLE_PDB=ON"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1927180Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1927420Z [36;1mif [ -n "" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1927640Z [36;1m  CCACHE_PATH="$(which "")"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1928280Z [36;1m  CMAKE_EXTRA_ARGS="$CMAKE_EXTRA_ARGS -DCMAKE_C_COMPILER_LAUNCHER=${CCACHE_PATH} -DCMAKE_CXX_COMPILER_LAUNCHER=${CCACHE_PATH}"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1928760Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1929650Z [36;1mcmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DGEODE_CODEGEN_CMAKE_ARGS="-DCMAKE_C_COMPILER=clang;-DCMAKE_CXX_COMPILER=clang++;-G Ninja" -G Ninja $CMAKE_EXTRA_ARGS -DGEODE_DONT_INSTALL_MODS=ON -DGEODE_TARGET_PLATFORM=MacOS -DCMAKE_POLICY_VERSION_MINIMUM=3.5[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1930700Z [36;1mcmake --build build --config Release  --parallel[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1930930Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1931270Z [36;1mmkdir "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1931760Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1931980Z [36;1mfor file in $(find ./build -name *.geode); do[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1932460Z [36;1m  cp $file "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1933060Z [36;1m  if [ mac = "linux" ] && [ "false" = "true" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1933390Z [36;1m    if [ mac = "android32" ] || [ mac = "android64" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1933780Z [36;1m      SO_FILE_NAME="$(basename $file .geode).mac.so"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1934090Z [36;1m      if [ -f "./build/$SO_FILE_NAME" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1934690Z [36;1m        dump_syms ./build/$SO_FILE_NAME -o "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output/$SO_FILE_NAME.sym"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1935280Z [36;1m      fi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1935460Z [36;1m    fi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1935630Z [36;1m  fi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1935830Z [36;1mdone[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1936000Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1936170Z [36;1mif [ mac = "win" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1936440Z [36;1m  if [ "false" = "true" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1936710Z [36;1m    for file in $(find ./build -name *.pdb); do[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1937190Z [36;1m      cp $file "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1937980Z [36;1m    done[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1938170Z [36;1m  fi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1938340Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1938580Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1938780Z [36;1mif [ "false" = "true" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1939100Z [36;1m  for file in $(find ./build -name *.pdb); do[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1939590Z [36;1m    cp $file "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1940040Z [36;1m  done[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1940310Z [36;1m  for file in $(find ./build -name *.dbg); do[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1940790Z [36;1m    cp $file "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1941230Z [36;1m  done[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1941500Z [36;1m  for dir in $(find ./build -name *.dSYM); do[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1941980Z [36;1m    cp -R $dir "/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1942430Z [36;1m  done[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1942880Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1943050Z [36;1m[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1943440Z [36;1mOUTPUT_DIR="/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/output"[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1943930Z [36;1mif [ mac = "mac" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1944310Z [36;1m  OUTPUT_DIR=$(python3 -c 'import os, sys; print(os.path.realpath(sys.argv[1]))' "$OUTPUT_DIR")[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1944780Z [36;1melif [ mac = "win" ]; then[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1945040Z [36;1m  OUTPUT_DIR=$(cygpath -wa "$OUTPUT_DIR")[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1945290Z [36;1melse[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1945560Z [36;1m  OUTPUT_DIR=$(realpath "$OUTPUT_DIR")[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1945800Z [36;1mfi[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.1946020Z [36;1mecho "output=$OUTPUT_DIR" >> $GITHUB_OUTPUT[0m
+Build for macOS	Build the mod	2026-04-09T01:05:18.2003310Z shell: /bin/bash --noprofile --norc -e -o pipefail {0}
+Build for macOS	Build the mod	2026-04-09T01:05:18.2003650Z env:
+Build for macOS	Build the mod	2026-04-09T01:05:18.2003860Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for macOS	Build the mod	2026-04-09T01:05:18.2004440Z   GEODE_SDK: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone
+Build for macOS	Build the mod	2026-04-09T01:05:18.2005120Z   CPM_SOURCE_CACHE: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache
+Build for macOS	Build the mod	2026-04-09T01:05:18.2005620Z ##[endgroup]
+Build for macOS	Build the mod	2026-04-09T01:05:20.1622820Z -- The C compiler identification is AppleClang 17.0.0.17000013
+Build for macOS	Build the mod	2026-04-09T01:05:21.0133310Z -- The CXX compiler identification is AppleClang 17.0.0.17000013
+Build for macOS	Build the mod	2026-04-09T01:05:21.0476710Z -- Detecting C compiler ABI info
+Build for macOS	Build the mod	2026-04-09T01:05:21.2023590Z -- Detecting C compiler ABI info - done
+Build for macOS	Build the mod	2026-04-09T01:05:21.2468760Z -- Check for working C compiler: /usr/bin/clang - skipped
+Build for macOS	Build the mod	2026-04-09T01:05:21.2471250Z -- Detecting C compile features
+Build for macOS	Build the mod	2026-04-09T01:05:21.2477670Z -- Detecting C compile features - done
+Build for macOS	Build the mod	2026-04-09T01:05:21.2539650Z -- Detecting CXX compiler ABI info
+Build for macOS	Build the mod	2026-04-09T01:05:21.4147290Z -- Detecting CXX compiler ABI info - done
+Build for macOS	Build the mod	2026-04-09T01:05:21.4580780Z -- Check for working CXX compiler: /usr/bin/clang++ - skipped
+Build for macOS	Build the mod	2026-04-09T01:05:21.4582150Z -- Detecting CXX compile features
+Build for macOS	Build the mod	2026-04-09T01:05:21.4586690Z -- Detecting CXX compile features - done
+Build for macOS	Build the mod	2026-04-09T01:05:21.4614000Z -- Found Geode: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone
+Build for macOS	Build the mod	2026-04-09T01:05:21.4630570Z -- Version: 5.5.3
+Build for macOS	Build the mod	2026-04-09T01:05:21.4692620Z -- No override path for bindings provided, using CPM to clone default. If you would like to use a separate clone of the bindings repo (for example in order to be able to efficiently change and contribute new bindings) then set GEODE_BINDINGS_REPO_PATH to where you have cloned the repository (system environment variables are supported).
+Build for macOS	Build the mod	2026-04-09T01:05:21.4693870Z -- CPM: Adding package bindings@ (main)
+Build for macOS	Build the mod	2026-04-09T01:05:21.4698190Z -- Populating bindings
+Build for macOS	Build the mod	2026-04-09T01:05:21.5553090Z -- Configuring done (0.1s)
+Build for macOS	Build the mod	2026-04-09T01:05:21.5613470Z -- Generating done (0.0s)
+Build for macOS	Build the mod	2026-04-09T01:05:21.5617910Z -- Build files have been written to: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/_deps/bindings-subbuild
+Build for macOS	Build the mod	2026-04-09T01:05:21.5825480Z [1/9] Creating directories for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:21.5826290Z [1/9] Performing download step (git clone) for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:21.6032600Z Cloning into 'bindings-src'...
+Build for macOS	Build the mod	2026-04-09T01:05:27.7600670Z Already on 'main'
+Build for macOS	Build the mod	2026-04-09T01:05:27.7602490Z Your branch is up to date with 'origin/main'.
+Build for macOS	Build the mod	2026-04-09T01:05:27.8649080Z [2/9] Performing update step for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:27.8865150Z -- Fetching latest from the remote origin
+Build for macOS	Build the mod	2026-04-09T01:05:28.4656300Z [3/9] No patch step for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:28.4964420Z [5/9] No configure step for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:28.5266570Z [6/9] No build step for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:28.5463470Z [7/9] No install step for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:28.5612160Z [8/9] No test step for 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:28.5811940Z [9/9] Completed 'bindings-populate'
+Build for macOS	Build the mod	2026-04-09T01:05:28.5823750Z -- Looking for ccache/sccache
+Build for macOS	Build the mod	2026-04-09T01:05:28.5896990Z Not using a caching compiler (ccache/sccache).
+Build for macOS	Build the mod	2026-04-09T01:05:28.5897400Z -- Looking for ccache/sccache - not found
+Build for macOS	Build the mod	2026-04-09T01:05:28.5898230Z -- Pre-compiled headers - ON
+Build for macOS	Build the mod	2026-04-09T01:05:28.6999250Z -- Found Geode CLI: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/my-epic-geode-cli/geode (version 3.7.4)
+Build for macOS	Build the mod	2026-04-09T01:05:28.7015820Z -- Found Git: /opt/homebrew/bin/git (found version "2.53.0")
+Build for macOS	Build the mod	2026-04-09T01:05:28.7191550Z -- CPM: Adding package result@1.4.1 (v1.4.1 at /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/result/1b9c)
+Build for macOS	Build the mod	2026-04-09T01:05:28.7410700Z -- CPM: Adding package json@3.3.0 (v3.3.0 at /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/json/75ca)
+Build for macOS	Build the mod	2026-04-09T01:05:28.8025010Z -- CPM: Adding package nontype_functional@6 (6d1d08c at /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/nontype_functional/aaa0)
+Build for macOS	Build the mod	2026-04-09T01:05:28.8562290Z -- {fmt} version: 12.1.0
+Build for macOS	Build the mod	2026-04-09T01:05:28.8562640Z -- Build type: Release
+Build for macOS	Build the mod	2026-04-09T01:05:28.8586530Z -- Performing Test HAS_NULLPTR_WARNING
+Build for macOS	Build the mod	2026-04-09T01:05:29.0435990Z -- Performing Test HAS_NULLPTR_WARNING - Success
+Build for macOS	Build the mod	2026-04-09T01:05:29.0630050Z -- CPM: Adding package fmt@12.1.0 (12.1.0 at /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226)
+Build for macOS	Build the mod	2026-04-09T01:05:29.0992420Z -- CPM: Adding package asp2@51 (51d3773 at /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/asp2/4dd3)
+Build for macOS	Build the mod	2026-04-09T01:05:29.1290310Z -- Arc features: time
+Build for macOS	Build the mod	2026-04-09T01:05:29.1296000Z -- CPM: Adding package arc@1.5.5 (v1.5.5 at /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/arc/70cb)
+Build for macOS	Build the mod	2026-04-09T01:05:29.1706250Z -- CPM: Adding package TulipHook@3.1.11 (v3.1.11 at /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/tuliphook/37c6)
+Build for macOS	Build the mod	2026-04-09T01:05:29.1711180Z -- Performing Test SUPPORTS_W_NO_EVERYTHING
+Build for macOS	Build the mod	2026-04-09T01:05:29.3667360Z -- Performing Test SUPPORTS_W_NO_EVERYTHING - Success
+Build for macOS	Build the mod	2026-04-09T01:05:29.3673550Z Set SKIP_BUILDING_CODEGEN to OFF to force codegen to build locally.
+Build for macOS	Build the mod	2026-04-09T01:05:29.3673910Z -- Downloading Codegen
+Build for macOS	Build the mod	2026-04-09T01:05:29.8400390Z -- Downloading Codegen - success
+Build for macOS	Build the mod	2026-04-09T01:05:29.8500050Z -- Skipping building Codegen
+Build for macOS	Build the mod	2026-04-09T01:05:29.8526580Z -- Running Codegen
+Build for macOS	Build the mod	2026-04-09T01:05:31.7109200Z './Codegen' 'MacOS' '/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/_deps/bindings-src/bindings/2.2081' '/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/bindings/bindings'
+Build for macOS	Build the mod	2026-04-09T01:05:31.7111760Z -- Setting up DeviousEditorClassicRemastered
+Build for macOS	Build the mod	2026-04-09T01:05:31.7132800Z -- Mod bishop.devious_editor_classic_remastered is compiling for Geode version 5.5.3
+Build for macOS	Build the mod	2026-04-09T01:05:31.7147320Z -- Mod bishop.devious_editor_classic_remastered is compiling for Geometry Dash version 2.2081
+Build for macOS	Build the mod	2026-04-09T01:05:31.8511620Z -- Skipping installing DeviousEditorClassicRemastered
+Build for macOS	Build the mod	2026-04-09T01:05:31.8517550Z -- Configuring done (13.6s)
+Build for macOS	Build the mod	2026-04-09T01:05:32.1096830Z -- Generating done (0.3s)
+Build for macOS	Build the mod	2026-04-09T01:05:32.1130440Z -- Build files have been written to: /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build
+Build for macOS	Build the mod	2026-04-09T01:05:32.1440890Z [0/2] Re-checking globbed directories...
+Build for macOS	Build the mod	2026-04-09T01:05:34.2278900Z [1/35] Building CXX object _deps/fmt-build/CMakeFiles/fmt.dir/src/os.cc.o
+Build for macOS	Build the mod	2026-04-09T01:05:37.8965550Z [2/35] Building CXX object _deps/fmt-build/CMakeFiles/fmt.dir/src/format.cc.o
+Build for macOS	Build the mod	2026-04-09T01:05:39.9090870Z [3/35] Building CXX object _deps/asp2-build/CMakeFiles/asp.dir/Unity/unity_0_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:05:40.1100580Z [4/35] Linking CXX static library _deps/fmt-build/libfmt.a
+Build for macOS	Build the mod	2026-04-09T01:05:40.2253500Z [5/35] Linking CXX static library _deps/asp2-build/libasp.a
+Build for macOS	Build the mod	2026-04-09T01:05:42.2233520Z [6/35] Building CXX object _deps/arc-build/CMakeFiles/arc.dir/Unity/unity_0_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:05:42.3487000Z [7/35] Linking CXX static library _deps/arc-build/libarc.a
+Build for macOS	Build the mod	2026-04-09T01:05:44.8854380Z [8/35] Running Codegen
+Build for macOS	Build the mod	2026-04-09T01:06:02.0789630Z [9/35] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch_arm64.hxx.pch
+Build for macOS	Build the mod	2026-04-09T01:06:02.9214240Z [10/35] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch_x86_64.hxx.pch
+Build for macOS	Build the mod	2026-04-09T01:06:18.7075110Z [11/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_14_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:28.5159210Z [12/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_13_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:35.3174620Z [13/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_12_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:47.5531760Z [14/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_10_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:47.7857950Z [15/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_11_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:51.1146780Z [16/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_9_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:58.4454040Z [17/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_6_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:58.4958140Z [18/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_5_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:59.1729280Z [19/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_7_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:06:59.7790030Z [20/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_8_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:07:01.3358030Z [21/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_4_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:07:04.7182940Z [22/35] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.o
+Build for macOS	Build the mod	2026-04-09T01:07:04.7283500Z FAILED: [code=1] CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.o 
+Build for macOS	Build the mod	2026-04-09T01:07:04.7392510Z /usr/bin/clang++ -DARC_FEATURE_TIME=1 -DCommentType=CommentTypeDummy -DDeviousEditorClassicRemastered_EXPORTS -DGEODE_COMP_GD_VERSION=22081 -DGEODE_GD_VERSION=2.2081 -DGEODE_GD_VERSION_STRING=\"2.2081\" -DGEODE_MOD_ID=\"bishop.devious_editor_classic_remastered\" -DGL_SILENCE_DEPRECATION -DMAT_JSON_DYNAMIC=1 -DPROJECT_NAME=DeviousEditorClassicRemastered -I/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include -I/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/cocos/include -I/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/cocos/extensions -I/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/fmod -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/bindings/bindings -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/_deps/bindings-src/bindings/include -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/include -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/tuliphook/37c6/include -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/result/1b9c/include -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/json/75ca/include -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/nontype_functional/aaa0/include -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/asp2/4dd3/include -isystem /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/arc/70cb/include -O3 -DNDEBUG -std=gnu++23 -flto=thin -arch arm64 -arch x86_64 -mmacosx-version-min=11.0 -fPIC -fvisibility=hidden -ffunction-sections -fdata-sections -Winvalid-pch -Xarch_arm64 -include/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch_arm64.hxx -Xarch_x86_64 -include/Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch_x86_64.hxx -MD -MT CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.o -MF CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.o.d -o CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.o -c /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp
+Build for macOS	Build the mod	2026-04-09T01:07:04.7485450Z /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:246:24: error: no member named 'm_startBG' in 'LevelSettingsObject'
+Build for macOS	Build the mod	2026-04-09T01:07:04.7585670Z   246 |     s.bg         = ls->m_startBG;
+Build for macOS	Build the mod	2026-04-09T01:07:04.7686790Z       |                    ~~  ^
+Build for macOS	Build the mod	2026-04-09T01:07:04.7788170Z /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:247:24: error: no member named 'm_startGround' in 'LevelSettingsObject'
+Build for macOS	Build the mod	2026-04-09T01:07:04.7888530Z   247 |     s.ground     = ls->m_startGround;
+Build for macOS	Build the mod	2026-04-09T01:07:04.7990290Z       |                    ~~  ^
+Build for macOS	Build the mod	2026-04-09T01:07:04.8106980Z /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:260:9: error: no member named 'm_startBG' in 'LevelSettingsObject'
+Build for macOS	Build the mod	2026-04-09T01:07:04.8209410Z   260 |     ls->m_startBG       = s.bg;
+Build for macOS	Build the mod	2026-04-09T01:07:04.8313900Z       |     ~~  ^
+Build for macOS	Build the mod	2026-04-09T01:07:04.8415820Z /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:261:9: error: no member named 'm_startGround' in 'LevelSettingsObject'
+Build for macOS	Build the mod	2026-04-09T01:07:04.8518920Z   261 |     ls->m_startGround   = s.ground;
+Build for macOS	Build the mod	2026-04-09T01:07:04.8621140Z       |     ~~  ^
+Build for macOS	Build the mod	2026-04-09T01:07:04.8723090Z /Users/runner/work/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:263:39: error: unknown type name 'PlayerMode'
+Build for macOS	Build the mod	2026-04-09T01:07:04.8753180Z   263 |     ls->m_startMode     = static_cast<PlayerMode>(s.gameMode);
+Build for macOS	Build the mod	2026-04-09T01:07:04.8967710Z       |                                       ^
+Build for macOS	Build the mod	2026-04-09T01:07:04.9058140Z 5 errors generated.
+Build for macOS	Build the mod	2026-04-09T01:07:07.6194010Z [23/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_2_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:07:07.9363620Z [24/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_3_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:07:08.0213310Z [25/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_1_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:07:09.4777760Z [26/35] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_0_cxx.cxx.o
+Build for macOS	Build the mod	2026-04-09T01:07:09.4799690Z ninja: build stopped: subcommand failed.
+Build for macOS	Build the mod	2026-04-09T01:07:09.5192560Z ##[error]Process completed with exit code 1.
+Build for Windows	Build the mod	∩╗┐2026-04-09T01:04:52.2349004Z ##[group]Run geode-sdk/build-geode-mod@main
+Build for Windows	Build the mod	2026-04-09T01:04:52.2349364Z with:
+Build for Windows	Build the mod	2026-04-09T01:04:52.2349602Z   configure-args: -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+Build for Windows	Build the mod	2026-04-09T01:04:52.2349891Z   sdk: given
+Build for Windows	Build the mod	2026-04-09T01:04:52.2350034Z   cli: latest
+Build for Windows	Build the mod	2026-04-09T01:04:52.2350195Z   build-config: Release
+Build for Windows	Build the mod	2026-04-09T01:04:52.2350369Z   path: ./
+Build for Windows	Build the mod	2026-04-09T01:04:52.2350535Z   combine: false
+Build for Windows	Build the mod	2026-04-09T01:04:52.2350725Z   bindings: geode-sdk/bindings
+Build for Windows	Build the mod	2026-04-09T01:04:52.2350917Z   android-min-sdk: 23
+Build for Windows	Build the mod	2026-04-09T01:04:52.2351087Z   ccache-variant: default
+Build for Windows	Build the mod	2026-04-09T01:04:52.2351276Z   use-cpm-cache: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.2351448Z   export-pdb: false
+Build for Windows	Build the mod	2026-04-09T01:04:52.2351631Z   export-debug: false
+Build for Windows	Build the mod	2026-04-09T01:04:52.2351790Z   use-lto: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.2351934Z   bundle-pdb: false
+Build for Windows	Build the mod	2026-04-09T01:04:52.2352104Z   export-symbols: false
+Build for Windows	Build the mod	2026-04-09T01:04:52.2352268Z env:
+Build for Windows	Build the mod	2026-04-09T01:04:52.2352434Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.2352648Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:04:52.2570598Z ##[group]Run DEFAULT_TARGET=Win64
+Build for Windows	Build the mod	2026-04-09T01:04:52.2571023Z [36;1mDEFAULT_TARGET=Win64[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2571258Z [36;1mDEFAULT_CCACHE=sccache[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2571531Z [36;1mif [ "$RUNNER_OS" = "Linux" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2571803Z [36;1m  ID=linux[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2572020Z [36;1m  DEFAULT_TARGET=Android64[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2572313Z [36;1melif [ "$RUNNER_OS" = "Windows" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2572598Z [36;1m  ID=win[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2572790Z [36;1m  DEFAULT_TARGET=Win64[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2573048Z [36;1melif [ "$RUNNER_OS" = "macOS" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2573336Z [36;1m  ID=mac[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2573566Z [36;1m  DEFAULT_TARGET=MacOS[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2573829Z [36;1m  DEFAULT_CCACHE=[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2574049Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2574196Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2574359Z [36;1mCCACHE_VARIANT=default[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2574623Z [36;1mif [ "$CCACHE_VARIANT" = "default" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2574943Z [36;1m  CCACHE_VARIANT=$DEFAULT_CCACHE[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2575149Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2575296Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2575425Z [36;1mTARGET=[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2575598Z [36;1mif [ "$TARGET" = "" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2575807Z [36;1m  TARGET=$DEFAULT_TARGET[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2576002Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2576147Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2576308Z [36;1mif [ "$TARGET" = "Android32" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2576558Z [36;1m  OUTPUT_ID=android32[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2576784Z [36;1melif [ "$TARGET" = "Android64" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2577030Z [36;1m  OUTPUT_ID=android64[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2577232Z [36;1melif [ "$TARGET" = "Win64" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2577457Z [36;1m  OUTPUT_ID=win[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2577644Z [36;1melif [ "$TARGET" = "MacOS" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2577870Z [36;1m  OUTPUT_ID=mac[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2578066Z [36;1melif [ "$TARGET" = "iOS" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2578277Z [36;1m  OUTPUT_ID=ios[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2578444Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2578582Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2578741Z [36;1mecho "id=$ID" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2578978Z [36;1mecho "target=$TARGET" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2579258Z [36;1mecho "target_id=$OUTPUT_ID" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2579570Z [36;1mecho "ccache_variant=$CCACHE_VARIANT" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:04:52.2597391Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Build for Windows	Build the mod	2026-04-09T01:04:52.2597976Z env:
+Build for Windows	Build the mod	2026-04-09T01:04:52.2598156Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.2598389Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:04:52.4097473Z ##[group]Run hendrikmuhs/ccache-action@v1
+Build for Windows	Build the mod	2026-04-09T01:04:52.4097738Z with:
+Build for Windows	Build the mod	2026-04-09T01:04:52.4097885Z   variant: sccache
+Build for Windows	Build the mod	2026-04-09T01:04:52.4098052Z   key: win-v1
+Build for Windows	Build the mod	2026-04-09T01:04:52.4100124Z   restore: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.4100286Z   max-size: 500MB
+Build for Windows	Build the mod	2026-04-09T01:04:52.4100444Z   verbose: 0
+Build for Windows	Build the mod	2026-04-09T01:04:52.4100603Z   save: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.4100755Z   append-timestamp: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.4100949Z   create-symlink: false
+Build for Windows	Build the mod	2026-04-09T01:04:52.4101133Z   job-summary: CCache Statistics
+Build for Windows	Build the mod	2026-04-09T01:04:52.4101354Z   update-package-index: false
+Build for Windows	Build the mod	2026-04-09T01:04:52.4101542Z env:
+Build for Windows	Build the mod	2026-04-09T01:04:52.4101705Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:04:52.4101935Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:04:52.5401746Z (node:1688) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Build for Windows	Build the mod	2026-04-09T01:04:52.6200125Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build for Windows	Build the mod	2026-04-09T01:04:52.6201354Z ##[group]Install sccache
+Build for Windows	Build the mod	2026-04-09T01:04:52.7183700Z [command]"C:\Program Files\Git\bin\sh.exe" -xc "curl -L 'https://github.com/mozilla/sccache/releases/download/v0.10.0/sccache-v0.10.0-x86_64-pc-windows-msvc.tar.gz' | tar xzf - -O --wildcards '*/sccache.exe' > 'C:\Users\runneradmin\.cargo\bin\sccache.exe'"
+Build for Windows	Build the mod	2026-04-09T01:04:52.7723699Z + curl -L https://github.com/mozilla/sccache/releases/download/v0.10.0/sccache-v0.10.0-x86_64-pc-windows-msvc.tar.gz
+Build for Windows	Build the mod	2026-04-09T01:04:52.7828903Z + tar xzf - -O --wildcards '*/sccache.exe'
+Build for Windows	Build the mod	2026-04-09T01:04:52.8092718Z   % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+Build for Windows	Build the mod	2026-04-09T01:04:52.8096513Z                                  Dload  Upload  Total   Spent   Left   Speed
+Build for Windows	Build the mod	2026-04-09T01:04:52.8097477Z 
+Build for Windows	Build the mod	2026-04-09T01:04:52.9430313Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:04:52.9432275Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:04:52.9432807Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:04:52.9437810Z 
+Build for Windows	Build the mod	2026-04-09T01:04:53.5226026Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:04:53.5226844Z 100  7.50M 100  7.50M   0      0 10.49M      0                              0
+Build for Windows	Build the mod	2026-04-09T01:04:53.5229377Z 100  7.50M 100  7.50M   0      0 10.49M      0                              0
+Build for Windows	Build the mod	2026-04-09T01:04:53.5230500Z 100  7.50M 100  7.50M   0      0 10.49M      0                              0
+Build for Windows	Build the mod	2026-04-09T01:04:53.6294503Z [command]"C:\Program Files\Git\bin\sh.exe" -xc "chmod +x 'C:\Users\runneradmin\.cargo\bin\sccache.exe'"
+Build for Windows	Build the mod	2026-04-09T01:04:53.6612884Z + chmod +x 'C:\Users\runneradmin\.cargo\bin\sccache.exe'
+Build for Windows	Build the mod	2026-04-09T01:04:53.7381525Z C:\Users\runneradmin\.cargo\bin\sccache.exe
+Build for Windows	Build the mod	2026-04-09T01:04:53.8009444Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:04:53.8009805Z ##[group]Restore cache
+Build for Windows	Build the mod	2026-04-09T01:04:54.0248771Z Cache hit for restore-key: sccache-win-v1-2026-04-09T01:00:26.423Z
+Build for Windows	Build the mod	2026-04-09T01:04:54.0357615Z (node:1688) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Build for Windows	Build the mod	2026-04-09T01:04:55.1218846Z Received 134217728 of 838483283 (16.0%), 127.7 MBs/sec
+Build for Windows	Build the mod	2026-04-09T01:04:56.1295575Z Received 306184192 of 838483283 (36.5%), 145.6 MBs/sec
+Build for Windows	Build the mod	2026-04-09T01:04:57.1317910Z Received 494927872 of 838483283 (59.0%), 156.7 MBs/sec
+Build for Windows	Build the mod	2026-04-09T01:04:58.1959087Z Received 671088640 of 838483283 (80.0%), 157.1 MBs/sec
+Build for Windows	Build the mod	2026-04-09T01:04:59.1986659Z Received 834288979 of 838483283 (99.5%), 156.7 MBs/sec
+Build for Windows	Build the mod	2026-04-09T01:04:59.2343541Z Received 838483283 of 838483283 (100.0%), 156.3 MBs/sec
+Build for Windows	Build the mod	2026-04-09T01:04:59.2347508Z Cache Size: ~800 MB (838483283 B)
+Build for Windows	Build the mod	2026-04-09T01:04:59.2385750Z [command]"C:\Program Files\Git\usr\bin\tar.exe" -xf D:/a/_temp/131d8fc4-2eee-446b-93ba-80b2d4bff44d/cache.tzst -P -C D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered --force-local --use-compress-program "zstd -d"
+Build for Windows	Build the mod	2026-04-09T01:05:00.5601500Z Cache restored successfully
+Build for Windows	Build the mod	2026-04-09T01:05:00.6313606Z Restored from cache key "sccache-win-v1-2026-04-09T01:00:26.423Z".
+Build for Windows	Build the mod	2026-04-09T01:05:00.6315384Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:00.6315705Z ##[group]Configure sccache, win32
+Build for Windows	Build the mod	2026-04-09T01:05:00.6911814Z [command]"C:\Program Files\Git\bin\sh.exe" -xc "env SCCACHE_IDLE_TIMEOUT=0 SCCACHE_DIR='D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered\.sccache' SCCACHE_CACHE_SIZE='500MB' sccache --start-server"
+Build for Windows	Build the mod	2026-04-09T01:05:00.7232187Z + env SCCACHE_IDLE_TIMEOUT=0 'SCCACHE_DIR=D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered\.sccache' SCCACHE_CACHE_SIZE=500MB sccache --start-server
+Build for Windows	Build the mod	2026-04-09T01:05:00.7611916Z sccache: Starting the server...
+Build for Windows	Build the mod	2026-04-09T01:05:00.7861475Z sccache: Listening on address 127.0.0.1:4226
+Build for Windows	Build the mod	2026-04-09T01:05:00.8531346Z [command]"C:\Program Files\Git\bin\sh.exe" -xc "sccache -z"
+Build for Windows	Build the mod	2026-04-09T01:05:00.8854808Z + sccache -z
+Build for Windows	Build the mod	2026-04-09T01:05:00.9020846Z Statistics zeroed.
+Build for Windows	Build the mod	2026-04-09T01:05:00.9084131Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:01.1034984Z ##[group]Run actions/cache@v4
+Build for Windows	Build the mod	2026-04-09T01:05:01.1035369Z with:
+Build for Windows	Build the mod	2026-04-09T01:05:01.1035764Z   path: D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/cpm-cache
+Build for Windows	Build the mod	2026-04-09T01:05:01.1036323Z   key: cpm-win-v1-56f97f802f1829f350fb0e50e277f6d2b30592c327c939340b9ae41daf0705fa
+Build for Windows	Build the mod	2026-04-09T01:05:01.1036731Z   restore-keys: cpm-win-v1-
+Build for Windows	Build the mod	
+Build for Windows	Build the mod	2026-04-09T01:05:01.1036954Z   enableCrossOsArchive: false
+Build for Windows	Build the mod	2026-04-09T01:05:01.1037157Z   fail-on-cache-miss: false
+Build for Windows	Build the mod	2026-04-09T01:05:01.1037356Z   lookup-only: false
+Build for Windows	Build the mod	2026-04-09T01:05:01.1037526Z   save-always: false
+Build for Windows	Build the mod	2026-04-09T01:05:01.1037677Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:01.1037847Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:01.1038095Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:01.2318433Z (node:3740) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Build for Windows	Build the mod	2026-04-09T01:05:01.2319141Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build for Windows	Build the mod	2026-04-09T01:05:01.4115349Z Cache hit for: cpm-win-v1-56f97f802f1829f350fb0e50e277f6d2b30592c327c939340b9ae41daf0705fa
+Build for Windows	Build the mod	2026-04-09T01:05:01.4227445Z (node:3740) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Build for Windows	Build the mod	2026-04-09T01:05:01.9290446Z Received 5698283 of 5698283 (100.0%), 14.6 MBs/sec
+Build for Windows	Build the mod	2026-04-09T01:05:01.9291932Z Cache Size: ~5 MB (5698283 B)
+Build for Windows	Build the mod	2026-04-09T01:05:01.9322178Z [command]"C:\Program Files\Git\usr\bin\tar.exe" -xf D:/a/_temp/ecbe5cb8-999a-4dd5-94cb-0b6e211a0c11/cache.tzst -P -C D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered --force-local --use-compress-program "zstd -d"
+Build for Windows	Build the mod	2026-04-09T01:05:02.1680864Z Cache restored successfully
+Build for Windows	Build the mod	2026-04-09T01:05:02.1791938Z Cache restored from key: cpm-win-v1-56f97f802f1829f350fb0e50e277f6d2b30592c327c939340b9ae41daf0705fa
+Build for Windows	Build the mod	2026-04-09T01:05:02.2033159Z ##[group]Run curl -L https://github.com/ninja-build/ninja/releases/latest/download/ninja-win.zip -o ninja.zip
+Build for Windows	Build the mod	2026-04-09T01:05:02.2033918Z [36;1mcurl -L https://github.com/ninja-build/ninja/releases/latest/download/ninja-win.zip -o ninja.zip[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.2034415Z [36;1m7z x ninja.zip -o"$GITHUB_WORKSPACE/ninja"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.2034751Z [36;1mecho "$GITHUB_WORKSPACE/ninja" >> $GITHUB_PATH[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.2048800Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Build for Windows	Build the mod	2026-04-09T01:05:02.2049176Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:02.2049379Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:02.2049631Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:02.2624725Z   % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+Build for Windows	Build the mod	2026-04-09T01:05:02.2626923Z                                  Dload  Upload  Total   Spent   Left   Speed
+Build for Windows	Build the mod	2026-04-09T01:05:02.2627287Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.4148617Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4149525Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4150417Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4151122Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.4365709Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4366398Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4367521Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4374230Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.4818775Z   0      0   0      0   0      0      0      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4819408Z 100 284.7k 100 284.7k   0      0  1.25M      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4821222Z 100 284.7k 100 284.7k   0      0  1.25M      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.4821564Z 100 284.7k 100 284.7k   0      0  1.25M      0                              0
+Build for Windows	Build the mod	2026-04-09T01:05:02.6743977Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.6744477Z 7-Zip 26.00 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-02-12
+Build for Windows	Build the mod	2026-04-09T01:05:02.6744818Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.6744929Z Scanning the drive for archives:
+Build for Windows	Build the mod	2026-04-09T01:05:02.6745199Z 1 file, 291570 bytes (285 KiB)
+Build for Windows	Build the mod	2026-04-09T01:05:02.6745620Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.6745734Z Extracting archive: ninja.zip
+Build for Windows	Build the mod	2026-04-09T01:05:02.6953555Z --
+Build for Windows	Build the mod	2026-04-09T01:05:02.6953772Z Path = ninja.zip
+Build for Windows	Build the mod	2026-04-09T01:05:02.6953980Z Type = zip
+Build for Windows	Build the mod	2026-04-09T01:05:02.6954166Z Physical Size = 291570
+Build for Windows	Build the mod	2026-04-09T01:05:02.6954308Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.6992115Z Everything is Ok
+Build for Windows	Build the mod	2026-04-09T01:05:02.6992236Z 
+Build for Windows	Build the mod	2026-04-09T01:05:02.6992313Z Size:       603648
+Build for Windows	Build the mod	2026-04-09T01:05:02.6992507Z Compressed: 291570
+Build for Windows	Build the mod	2026-04-09T01:05:02.7263886Z ##[group]Run geode-sdk/cli/.github/actions/setup@main
+Build for Windows	Build the mod	2026-04-09T01:05:02.7264189Z with:
+Build for Windows	Build the mod	2026-04-09T01:05:02.7264353Z   version: latest
+Build for Windows	Build the mod	2026-04-09T01:05:02.7264517Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:02.7264697Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:02.7264932Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:02.7380425Z ##[group]Run if [ "$RUNNER_OS" = "Linux" ]; then
+Build for Windows	Build the mod	2026-04-09T01:05:02.7380763Z [36;1mif [ "$RUNNER_OS" = "Linux" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.7381274Z [36;1m  echo "host=linux" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.7381553Z [36;1melif [ "$RUNNER_OS" = "Windows" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.7381831Z [36;1m  echo "host=win" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.7382094Z [36;1melif [ "$RUNNER_OS" = "macOS" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.7382356Z [36;1m  echo "host=mac" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.7382591Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:02.7396393Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Build for Windows	Build the mod	2026-04-09T01:05:02.7396780Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:02.7396954Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:02.7397190Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:02.7926574Z ##[group]Run robinraju/release-downloader@v1.10
+Build for Windows	Build the mod	2026-04-09T01:05:02.7926850Z with:
+Build for Windows	Build the mod	2026-04-09T01:05:02.7927021Z   repository: geode-sdk/cli
+Build for Windows	Build the mod	2026-04-09T01:05:02.7927249Z   latest: true
+Build for Windows	Build the mod	2026-04-09T01:05:02.7927416Z   fileName: *-win.zip
+Build for Windows	Build the mod	2026-04-09T01:05:02.7927593Z   tarBall: false
+Build for Windows	Build the mod	2026-04-09T01:05:02.7927757Z   zipBall: false
+Build for Windows	Build the mod	2026-04-09T01:05:02.7927930Z   out-file-path: my-epic-geode-cli
+Build for Windows	Build the mod	2026-04-09T01:05:02.7928159Z   preRelease: false
+Build for Windows	Build the mod	2026-04-09T01:05:02.7928326Z   extract: false
+Build for Windows	Build the mod	2026-04-09T01:05:02.7928599Z   token: ***
+Build for Windows	Build the mod	2026-04-09T01:05:02.7928790Z   github-api-url: https://api.github.com
+Build for Windows	Build the mod	2026-04-09T01:05:02.7929013Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:02.7929185Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:02.7929420Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:02.8911163Z Fetching latest release for repo geode-sdk/cli
+Build for Windows	Build the mod	2026-04-09T01:05:02.9083844Z (node:8824) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Build for Windows	Build the mod	2026-04-09T01:05:02.9084835Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Build for Windows	Build the mod	2026-04-09T01:05:03.0810577Z Found latest release version: v3.7.4
+Build for Windows	Build the mod	2026-04-09T01:05:03.0818799Z Downloading file: geode-cli-v3.7.4-win.zip to: D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered\my-epic-geode-cli
+Build for Windows	Build the mod	2026-04-09T01:05:03.4567151Z Done: D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered\my-epic-geode-cli\geode-cli-v3.7.4-win.zip
+Build for Windows	Build the mod	2026-04-09T01:05:03.4848113Z ##[group]Run 7z x "my-epic-geode-cli/*-win.zip" -omy-epic-geode-cli
+Build for Windows	Build the mod	2026-04-09T01:05:03.4848547Z [36;1m7z x "my-epic-geode-cli/*-win.zip" -omy-epic-geode-cli[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.4848870Z [36;1mchmod +x my-epic-geode-cli/geode[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.4849207Z [36;1mecho "$GITHUB_WORKSPACE/my-epic-geode-cli" >> $GITHUB_PATH[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.4863268Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Build for Windows	Build the mod	2026-04-09T01:05:03.4863634Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:03.4863815Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:03.4864051Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:03.5738705Z 
+Build for Windows	Build the mod	2026-04-09T01:05:03.5739292Z 7-Zip 26.00 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-02-12
+Build for Windows	Build the mod	2026-04-09T01:05:03.5739638Z 
+Build for Windows	Build the mod	2026-04-09T01:05:03.5739734Z Scanning the drive for archives:
+Build for Windows	Build the mod	2026-04-09T01:05:03.5739993Z 1 file, 11925441 bytes (12 MiB)
+Build for Windows	Build the mod	2026-04-09T01:05:03.5740130Z 
+Build for Windows	Build the mod	2026-04-09T01:05:03.5740304Z Extracting archive: my-epic-geode-cli\geode-cli-v3.7.4-win.zip
+Build for Windows	Build the mod	2026-04-09T01:05:03.7636020Z --
+Build for Windows	Build the mod	2026-04-09T01:05:03.7636389Z Path = my-epic-geode-cli\geode-cli-v3.7.4-win.zip
+Build for Windows	Build the mod	2026-04-09T01:05:03.7636679Z Type = zip
+Build for Windows	Build the mod	2026-04-09T01:05:03.7636865Z Physical Size = 11925441
+Build for Windows	Build the mod	2026-04-09T01:05:03.7637011Z 
+Build for Windows	Build the mod	2026-04-09T01:05:03.7639612Z Everything is Ok
+Build for Windows	Build the mod	2026-04-09T01:05:03.7639742Z 
+Build for Windows	Build the mod	2026-04-09T01:05:03.7639812Z Size:       32337756
+Build for Windows	Build the mod	2026-04-09T01:05:03.7640006Z Compressed: 11925441
+Build for Windows	Build the mod	2026-04-09T01:05:03.8054144Z ##[group]Run export CLI_PROFILE="D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/cli-profile"
+Build for Windows	Build the mod	2026-04-09T01:05:03.8054962Z [36;1mexport CLI_PROFILE="D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/cli-profile"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8055462Z [36;1m# for windows[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8055685Z [36;1mmkdir -p "$CLI_PROFILE/geode/mods"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8055909Z [36;1m# for mac[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8056124Z [36;1mmkdir -p "$CLI_PROFILE/Contents/geode/mods"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8056518Z [36;1mgeode profile add --name GithubActions "$CLI_PROFILE/GeometryDash.exe" win[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8056867Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8057282Z [36;1mgeode sdk install "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/geode-sdk-clone"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8057766Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8057939Z [36;1m# silly github actions wont refresh the env[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8058447Z [36;1mexport GEODE_SDK="D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/geode-sdk-clone"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8058954Z [36;1mecho "GEODE_SDK=$GEODE_SDK" >> $GITHUB_ENV[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8059203Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8059366Z [36;1mif [ "given" == "nightly" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8059616Z [36;1m  geode sdk update nightly[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8059878Z [36;1m  geode sdk install-binaries --platform win[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8060139Z [36;1melif [ "given" == "latest" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8060372Z [36;1m  geode sdk update stable[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8060635Z [36;1m  geode sdk install-binaries --platform win[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8060896Z [36;1melif [ "given" == "given" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8061356Z [36;1m  export MOD_JSON_PATH=$(find . -name "mod.json" -not -path "./geode-sdk-clone/*" -print | sort -r | head -n 1)[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8062035Z [36;1m  export TARGET_GEODE_VERSION=$(jq -r '.geode' $MOD_JSON_PATH)[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8062467Z [36;1m  echo "Updating to version $TARGET_GEODE_VERSION from $MOD_JSON_PATH"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8062845Z [36;1m  geode sdk update "$TARGET_GEODE_VERSION"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8064308Z [36;1m  geode sdk install-binaries --platform win --version "$TARGET_GEODE_VERSION"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8064664Z [36;1melse[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8064835Z [36;1m  geode sdk update given[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8065088Z [36;1m  geode sdk install-binaries --platform win[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8065332Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8065485Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8065864Z [36;1mexport CPM_CACHE="D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/cpm-cache"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8066385Z [36;1mecho "CPM_SOURCE_CACHE=$CPM_CACHE" >> $GITHUB_ENV[0m
+Build for Windows	Build the mod	2026-04-09T01:05:03.8079760Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Build for Windows	Build the mod	2026-04-09T01:05:03.8080129Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:03.8080300Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:03.8080535Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:03.9258879Z | Done | A new profile named 'GithubActions' has been created
+Build for Windows	Build the mod	2026-04-09T01:05:03.9538354Z | Info | Downloading SDK
+Build for Windows	Build the mod	2026-04-09T01:05:04.2124853Z | Info | Enumerating objects: 58645, done.
+Build for Windows	Build the mod	2026-04-09T01:05:04.2125368Z | Info | Counting objects:   0% (1/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2125952Z | Info | Counting objects:   1% (5/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2126341Z | Info | Counting objects:   2% (10/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2126654Z | Info | Counting objects:   3% (14/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2126935Z | Info | Counting objects:   4% (19/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2127246Z | Info | Counting objects:   5% (24/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2127573Z | Info | Counting objects:   6% (28/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2128255Z Counting objects:   7% (33/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2128842Z | Info | Counting objects:   8% (37/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2129062Z | Info | Counting objects:   9% (42/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2129291Z | Info | Counting objects:  10% (47/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2129519Z | Info | Counting objects:  11% (51/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2129744Z | Info | Counting objects:  12% (56/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2130131Z | Info | Counting objects:  13% (60/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2130364Z | Info | Counting objects:  14% (65/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2130583Z | Info | Counting objects:  15% (70/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2130814Z | Info | Counting objects:  16% (74/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2131039Z | Info | Counting objects:  17% (79/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2131263Z | Info | Counting objects:  18% (83/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2131488Z | Info | Counting objects:  19% (88/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2131710Z | Info | Counting objects:  20% (93/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2131929Z | Info | Counting objects:  21% (97/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2132167Z | Info | Counting objects:  22% (102/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2132406Z | Info | Counting objects:  23% (107/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2132636Z | Info | Counting objects:  24% (111/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2132865Z Counting objects:  25% (116/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2133089Z | Info | Counting objects:  26% (120/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2133385Z | Info | Counting objects:  27% (125/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2134165Z | Info | Counting objects:  28% (130/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2134859Z Counting objects:  29% (134/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2135290Z | Info | Counting objects:  30% (139/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2135703Z Counting objects:  31% (143/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2136314Z | Info | Counting objects:  32% (148/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2136741Z | Info | Counting objects:  33% (153/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2137172Z Counting objects:  34% (157/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2137580Z | Info | Counting objects:  35% (162/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2138173Z | Info | Counting objects:  36% (166/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2139123Z | Info | Counting objects:  37% (171/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2139505Z | Info | Counting objects:  38% (176/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2139724Z Counting objects:  39% (180/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2140048Z | Info | Counting objects:  40% (185/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2140275Z Counting objects:  41% (190/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2140645Z | Info | Counting objects:  42% (194/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2140867Z Counting objects:  43% (199/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2141073Z | Info | Counting objects:  44% (203/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2141284Z Counting objects:  45% (208/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2141490Z | Info | Counting objects:  46% (213/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2141708Z Counting objects:  47% (217/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2141948Z | Info | Counting objects:  48% (222/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2142537Z | Info | Counting objects:  49% (226/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2142777Z Counting objects:  50% (231/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2142980Z | Info | Counting objects:  51% (236/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2143219Z Counting objects:  52% (240/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2143424Z | Info | Counting objects:  53% (245/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2143642Z Counting objects:  54% (249/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2143845Z | Info | Counting objects:  55% (254/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2144068Z | Info | Counting objects:  56% (259/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2144284Z Counting objects:  57% (263/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2144496Z | Info | Counting objects:  58% (268/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2144725Z | Info | Counting objects:  59% (272/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2144943Z Counting objects:  60% (277/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2145149Z | Info | Counting objects:  61% (282/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2145370Z Counting objects:  62% (286/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2145569Z | Info | Counting objects:  63% (291/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2145871Z | Info | Counting objects:  64% (296/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2146100Z Counting objects:  65% (300/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2146314Z | Info | Counting objects:  66% (305/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2146548Z | Info | Counting objects:  67% (309/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2146772Z Counting objects:  68% (314/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2146990Z | Info | Counting objects:  69% (319/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2147207Z Counting objects:  70% (323/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2147420Z | Info | Counting objects:  71% (328/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2147653Z | Info | Counting objects:  72% (332/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2147879Z | Info | Counting objects:  73% (337/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2148096Z Counting objects:  74% (342/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2148308Z | Info | Counting objects:  75% (346/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2148516Z Counting objects:  76% (351/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2148710Z Counting objects:  77% (355/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2148917Z Counting objects:  78% (360/4| Info | 61)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2149144Z Counting objects:  79% (365/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2149340Z Counting objects:  80% (369/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2149534Z Counting objects:  81% (374/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2149740Z Counting objects:  82% (3| Info | 79/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2149961Z Counting objects:  83% (383/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2150355Z Counting objects:  84% (388/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2150553Z Counting objects:  85% (392/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2150760Z Counting objects:  86| Info | % (397/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2150984Z Counting objects:  87% (402/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2151183Z Counting objects:  88% (406/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2151394Z | Info | Counting objects:  89% (411/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2151616Z Counting objects:  90% (415/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2151826Z | Info | Counting objects:  91% (420/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2152038Z Counting objects:  92% (425/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2152240Z | Info | Counting objects:  93% (429/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2152453Z | Info | Counting objects:  94% (434/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2152668Z Counting objects:  95% (438/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2152874Z | Info | Counting objects:  96% (443/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2153096Z Counting objects:  97% (448/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2154107Z | Info | Counting objects:  98% (452/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2154345Z | Info | Counting objects:  99% (457/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2154563Z | Info | Counting objects: 100% (461/461)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2154812Z | Info | Counting objects: 100% (461/461), done.
+Build for Windows	Build the mod	2026-04-09T01:05:04.2155193Z | Info | Compressing objects:   0% (1/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2155436Z Compressing objects:   1% (2/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2155661Z | Info | Compressing objects:   2% (4/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2155902Z | Info | Compressing objects:   3% (6/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2156175Z | Info | Compressing objects:   4% (7/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2156550Z | Info | Compressing objects:   5% (9/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2156824Z | Info | Compressing objects:   6% (11/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2157071Z | Info | Compressing objects:   7% (13/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2157309Z | Info | Compressing objects:   8% (14/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2157548Z | Info | Compressing objects:   9% (16/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2157783Z | Info | Compressing objects:  10% (18/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2158020Z | Info | Compressing objects:  11% (20/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2158251Z | Info | Compressing objects:  12% (21/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2158484Z | Info | Compressing objects:  13% (23/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2158726Z | Info | Compressing objects:  14% (25/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2158968Z | Info | Compressing objects:  15% (27/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2159197Z | Info | Compressing objects:  16% (28/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2159436Z | Info | Compressing objects:  17% (30/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2159670Z | Info | Compressing objects:  18% (32/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2159903Z | Info | Compressing objects:  19% (34/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2160139Z Compressing objects:  20% (35/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2160364Z | Info | Compressing objects:  21% (37/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2160586Z Compressing objects:  22% (39/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2160811Z | Info | Compressing objects:  23% (41/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2161049Z | Info | Compressing objects:  24% (42/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2161290Z | Info | Compressing objects:  25% (44/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2161518Z | Info | Compressing objects:  26% (46/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2161743Z | Info | Compressing objects:  27% (48/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2161965Z | Info | Compressing objects:  28% (49/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2162206Z | Info | Compressing objects:  29% (51/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2162434Z | Info | Compressing objects:  30% (53/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2162661Z | Info | Compressing objects:  31% (55/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2162892Z | Info | Compressing objects:  32% (56/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2163125Z | Info | Compressing objects:  33% (58/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2163347Z | Info | Compressing objects:  34% (60/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2163574Z | Info | Compressing objects:  35% (62/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2163801Z Compressing objects:  36% (63/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2164020Z | Info | Compressing objects:  37% (65/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2164258Z | Info | Compressing objects:  38% (67/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2164491Z | Info | Compressing objects:  39% (69/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2164715Z | Info | Compressing objects:  40% (70/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2164948Z | Info | Compressing objects:  41% (72/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2165177Z | Info | Compressing objects:  42% (74/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2165414Z | Info | Compressing objects:  43% (76/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2165649Z | Info | Compressing objects:  44% (77/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2165881Z | Info | Compressing objects:  45% (79/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2166102Z | Info | Compressing objects:  46% (81/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2166331Z | Info | Compressing objects:  47% (83/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2166565Z | Info | Compressing objects:  48% (84/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2166800Z | Info | Compressing objects:  49% (86/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2167035Z | Info | Compressing objects:  50% (88/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2167273Z | Info | Compressing objects:  51% (90/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2167675Z | Info | Compressing objects:  52% (91/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2167920Z | Info | Compressing objects:  53% (93/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2168155Z | Info | Compressing objects:  54% (95/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2168392Z | Info | Compressing objects:  55% (97/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2168736Z | Info | Compressing objects:  56% (98/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2168994Z | Info | Compressing objects:  57% (100/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2169232Z | Info | Compressing objects:  58% (102/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2169472Z | Info | Compressing objects:  59% (104/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2169718Z | Info | Compressing objects:  60% (105/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2169954Z | Info | Compressing objects:  61% (107/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2170449Z | Info | Compressing objects:  62% (109/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2184042Z | Info | Compressing objects:  63% (111/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2184532Z | Info | Compressing objects:  64% (112/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2184935Z | Info | Compressing objects:  65% (114/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2185328Z | Info | Compressing objects:  66% (116/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2185734Z | Info | Compressing objects:  67% (118/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2186125Z | Info | Compressing objects:  68% (119/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2186523Z | Info | Compressing objects:  69% (121/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2186967Z | Info | Compressing objects:  70% (123/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2187368Z | Info | Compressing objects:  71% (125/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2187783Z | Info | Compressing objects:  72% (126/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2188195Z | Info | Compressing objects:  73% (128/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2188578Z | Info | Compressing objects:  74% (130/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2188981Z | Info | Compressing objects:  75% (132/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2189343Z | Info | Compressing objects:  76% (133/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2189728Z | Info | Compressing objects:  77% (135/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2190129Z | Info | Compressing objects:  78% (137/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2190926Z | Info | Compressing objects:  79% (139/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2191343Z | Info | Compressing objects:  80% (140/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2191758Z | Info | Compressing objects:  81% (142/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2192159Z | Info | Compressing objects:  82% (144/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2192557Z | Info | Compressing objects:  83% (146/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2192960Z | Info | Compressing objects:  84% (147/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2193355Z | Info | Compressing objects:  85% (149/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2193596Z | Info | Compressing objects:  86% (151/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2193836Z | Info | Compressing objects:  87% (153/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2194078Z | Info | Compressing objects:  88% (154/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2194322Z | Info | Compressing objects:  89% (156/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2194618Z | Info | Compressing objects:  90% (158/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2194866Z | Info | Compressing objects:  91% (160/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2195108Z | Info | Compressing objects:  92% (161/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2195357Z | Info | Compressing objects:  93% (163/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2195599Z | Info | Compressing objects:  94% (165/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2195832Z | Info | Compressing objects:  95% (167/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2196071Z | Info | Compressing objects:  96% (168/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2196317Z | Info | Compressing objects:  97% (170/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2196602Z | Info | Compressing objects:  98% (172/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2196992Z | Info | Compressing objects:  99% (174/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2197240Z | Info | Compressing objects: 100% (175/175)
+Build for Windows	Build the mod	2026-04-09T01:05:04.2197494Z | Info | Compressing objects: 100% (175/175), done.
+Build for Windows	Build the mod	2026-04-09T01:05:13.0493942Z | Info | Total 58645 (delta 384), reused 295 (delta 286), pack-reused 58184 (from 3)
+Build for Windows	Build the mod	2026-04-09T01:05:17.6535799Z | Info | Set GEODE_SDK environment variable automatically
+Build for Windows	Build the mod	2026-04-09T01:05:17.6919376Z | Info | Updating head
+Build for Windows	Build the mod	2026-04-09T01:05:17.7671627Z | Done | Updated head to v5.5.3
+Build for Windows	Build the mod	2026-04-09T01:05:17.7672296Z | Done | Successfully installed SDK
+Build for Windows	Build the mod	2026-04-09T01:05:17.7672705Z | Info | Please restart your command line to have the GEODE_SDK enviroment variable set.
+Build for Windows	Build the mod	2026-04-09T01:05:17.7673185Z | Info | Use `geode sdk install-binaries` to install pre-built binaries
+Build for Windows	Build the mod	2026-04-09T01:05:18.0731719Z Updating to version 5.5.3 from ./mod.json
+Build for Windows	Build the mod	2026-04-09T01:05:18.0979270Z | Info | Switching to 5.5.3
+Build for Windows	Build the mod	2026-04-09T01:05:18.0979608Z | Info | Updating SDK
+Build for Windows	Build the mod	2026-04-09T01:05:18.2447758Z | Info | Updating head
+Build for Windows	Build the mod	2026-04-09T01:05:18.3360455Z | Info | Switched to 5.5.3
+Build for Windows	Build the mod	2026-04-09T01:05:18.3360813Z | Done | Successfully updated SDK.
+Build for Windows	Build the mod	2026-04-09T01:05:18.3667492Z | Info | Installing binaries for 5.5.3
+Build for Windows	Build the mod	2026-04-09T01:05:18.5430830Z | Info | Found binaries for platform Windows
+Build for Windows	Build the mod	2026-04-09T01:05:18.5433959Z | Info | Downloading
+Build for Windows	Build the mod	2026-04-09T01:05:19.1195462Z | Done | Binaries installed
+Build for Windows	Build the mod	2026-04-09T01:05:19.1434347Z ##[group]Run mkdir -p $HOME/.cache
+Build for Windows	Build the mod	2026-04-09T01:05:19.1434685Z [36;1mmkdir -p $HOME/.cache[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1434899Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1435090Z [36;1mNDK_PATH="/usr/local/lib/android/sdk/ndk/"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1435354Z [36;1mif [ "" = "" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1435577Z [36;1m  NDK_PATH="$ANDROID_NDK_LATEST_HOME"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1435810Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1435960Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1436108Z [36;1mcd "./"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1436273Z [36;1mCMAKE_EXTRA_ARGS=""[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1436483Z [36;1mif [ win = "mac" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1437069Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 -DGEODE_DISABLE_PRECOMPILED_HEADERS=OFF -DCMAKE_AR='/usr/bin/ar' -DCMAKE_RANLIB='/usr/bin/ranlib'"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1437668Z [36;1melif [ win = "android32" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1438342Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake -DANDROID_STL=c++_shared -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-23"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1439014Z [36;1melif [ win = "android64" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1439661Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_TOOLCHAIN_FILE=$NDK_PATH/build/cmake/android.toolchain.cmake -DANDROID_STL=c++_shared -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-23"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1440312Z [36;1melif [ win = "ios" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1440779Z [36;1m  CMAKE_EXTRA_ARGS="-DCMAKE_SYSTEM_NAME=iOS -DGEODE_TARGET_PLATFORM=iOS -DGEODE_DISABLE_PRECOMPILED_HEADERS=OFF"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1441689Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1441866Z [36;1mif [ "true" = "true" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1442225Z [36;1m  CMAKE_EXTRA_ARGS="$CMAKE_EXTRA_ARGS -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1442588Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1442799Z [36;1mif [ "false" = "true" ] && [ win = "win" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1443147Z [36;1m  CMAKE_EXTRA_ARGS="$CMAKE_EXTRA_ARGS -DGEODE_BUNDLE_PDB=ON"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1443440Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1443616Z [36;1mif [ -n "sccache" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1443851Z [36;1m  CCACHE_PATH="$(which "sccache")"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1444377Z [36;1m  CMAKE_EXTRA_ARGS="$CMAKE_EXTRA_ARGS -DCMAKE_C_COMPILER_LAUNCHER=${CCACHE_PATH} -DCMAKE_CXX_COMPILER_LAUNCHER=${CCACHE_PATH}"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1444877Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1445888Z [36;1mcmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DGEODE_CODEGEN_CMAKE_ARGS="-DCMAKE_C_COMPILER=clang;-DCMAKE_CXX_COMPILER=clang++;-G Ninja" -G Ninja $CMAKE_EXTRA_ARGS -DGEODE_DONT_INSTALL_MODS=ON -DGEODE_TARGET_PLATFORM=Win64 -DCMAKE_POLICY_VERSION_MINIMUM=3.5[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1447025Z [36;1mcmake --build build --config Release  --parallel[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1447297Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1447647Z [36;1mmkdir "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1448062Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1448449Z [36;1mfor file in $(find ./build -name *.geode); do[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1448912Z [36;1m  cp $file "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1449389Z [36;1m  if [ win = "linux" ] && [ "false" = "true" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1449722Z [36;1m    if [ win = "android32" ] || [ win = "android64" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1450199Z [36;1m      SO_FILE_NAME="$(basename $file .geode).win.so"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1450502Z [36;1m      if [ -f "./build/$SO_FILE_NAME" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1451086Z [36;1m        dump_syms ./build/$SO_FILE_NAME -o "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output/$SO_FILE_NAME.sym"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1451650Z [36;1m      fi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1451813Z [36;1m    fi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1451966Z [36;1m  fi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1452128Z [36;1mdone[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1452282Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1452434Z [36;1mif [ win = "win" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1452663Z [36;1m  if [ "false" = "true" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1452927Z [36;1m    for file in $(find ./build -name *.pdb); do[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1453387Z [36;1m      cp $file "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1453803Z [36;1m    done[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1453956Z [36;1m  fi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1454097Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1454231Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1454385Z [36;1mif [ "false" = "true" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1454640Z [36;1m  for file in $(find ./build -name *.pdb); do[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1455090Z [36;1m    cp $file "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1455501Z [36;1m  done[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1455699Z [36;1m  for file in $(find ./build -name *.dbg); do[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1456130Z [36;1m    cp $file "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1456533Z [36;1m  done[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1456726Z [36;1m  for dir in $(find ./build -name *.dSYM); do[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1457173Z [36;1m    cp -R $dir "D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1457589Z [36;1m  done[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1457741Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1457885Z [36;1m[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1458231Z [36;1mOUTPUT_DIR="D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/output"[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1458664Z [36;1mif [ win = "mac" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1459057Z [36;1m  OUTPUT_DIR=$(python3 -c 'import os, sys; print(os.path.realpath(sys.argv[1]))' "$OUTPUT_DIR")[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1459507Z [36;1melif [ win = "win" ]; then[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1459766Z [36;1m  OUTPUT_DIR=$(cygpath -wa "$OUTPUT_DIR")[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1460015Z [36;1melse[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1460205Z [36;1m  OUTPUT_DIR=$(realpath "$OUTPUT_DIR")[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1460444Z [36;1mfi[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1460648Z [36;1mecho "output=$OUTPUT_DIR" >> $GITHUB_OUTPUT[0m
+Build for Windows	Build the mod	2026-04-09T01:05:19.1474467Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+Build for Windows	Build the mod	2026-04-09T01:05:19.1474830Z env:
+Build for Windows	Build the mod	2026-04-09T01:05:19.1475023Z   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+Build for Windows	Build the mod	2026-04-09T01:05:19.1475482Z   GEODE_SDK: D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/geode-sdk-clone
+Build for Windows	Build the mod	2026-04-09T01:05:19.1476129Z   CPM_SOURCE_CACHE: D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/cpm-cache
+Build for Windows	Build the mod	2026-04-09T01:05:19.1476567Z ##[endgroup]
+Build for Windows	Build the mod	2026-04-09T01:05:24.6670818Z -- The C compiler identification is Clang 20.1.8 with GNU-like command-line
+Build for Windows	Build the mod	2026-04-09T01:05:27.9120255Z -- The CXX compiler identification is Clang 20.1.8 with GNU-like command-line
+Build for Windows	Build the mod	2026-04-09T01:05:28.0521273Z -- Detecting C compiler ABI info
+Build for Windows	Build the mod	2026-04-09T01:05:30.0137674Z -- Detecting C compiler ABI info - done
+Build for Windows	Build the mod	2026-04-09T01:05:30.0642637Z -- Check for working C compiler: C:/Program Files/LLVM/bin/clang.exe - skipped
+Build for Windows	Build the mod	2026-04-09T01:05:30.0658349Z -- Detecting C compile features
+Build for Windows	Build the mod	2026-04-09T01:05:30.0709382Z -- Detecting C compile features - done
+Build for Windows	Build the mod	2026-04-09T01:05:30.1002457Z -- Detecting CXX compiler ABI info
+Build for Windows	Build the mod	2026-04-09T01:05:30.5709581Z -- Detecting CXX compiler ABI info - done
+Build for Windows	Build the mod	2026-04-09T01:05:30.6100563Z -- Check for working CXX compiler: C:/Program Files/LLVM/bin/clang++.exe - skipped
+Build for Windows	Build the mod	2026-04-09T01:05:30.6105128Z -- Detecting CXX compile features
+Build for Windows	Build the mod	2026-04-09T01:05:31.0939864Z -- Detecting CXX compile features - done
+Build for Windows	Build the mod	2026-04-09T01:05:31.0969218Z -- Found Geode: D:\a\Devious-Editor-classic-Remastered\Devious-Editor-classic-Remastered/geode-sdk-clone
+Build for Windows	Build the mod	2026-04-09T01:05:31.0986579Z -- Version: 5.5.3
+Build for Windows	Build the mod	2026-04-09T01:05:31.1318683Z -- No override path for bindings provided, using CPM to clone default. If you would like to use a separate clone of the bindings repo (for example in order to be able to efficiently change and contribute new bindings) then set GEODE_BINDINGS_REPO_PATH to where you have cloned the repository (system environment variables are supported).
+Build for Windows	Build the mod	2026-04-09T01:05:31.1321160Z -- CPM: Adding package bindings@ (main)
+Build for Windows	Build the mod	2026-04-09T01:05:31.1345281Z -- Populating bindings
+Build for Windows	Build the mod	2026-04-09T01:05:31.2501509Z -- Configuring done (0.1s)
+Build for Windows	Build the mod	2026-04-09T01:05:31.2720031Z -- Generating done (0.0s)
+Build for Windows	Build the mod	2026-04-09T01:05:31.2727756Z -- Build files have been written to: D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/_deps/bindings-subbuild
+Build for Windows	Build the mod	2026-04-09T01:05:31.3484438Z [1/9] Creating directories for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:31.3486851Z [1/9] Performing download step (git clone) for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:31.4049715Z Cloning into 'bindings-src'...
+Build for Windows	Build the mod	2026-04-09T01:05:39.0552131Z Already on 'main'
+Build for Windows	Build the mod	2026-04-09T01:05:39.0572061Z Your branch is up to date with 'origin/main'.
+Build for Windows	Build the mod	2026-04-09T01:05:39.6172987Z [2/9] Performing update step for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:39.6752184Z -- Fetching latest from the remote origin
+Build for Windows	Build the mod	2026-04-09T01:05:40.5629785Z [3/9] No patch step for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:40.6480934Z [5/9] No configure step for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:40.6918724Z [6/9] No build step for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:40.7348248Z [7/9] No install step for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:40.7780239Z [8/9] No test step for 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:40.8422290Z [9/9] Completed 'bindings-populate'
+Build for Windows	Build the mod	2026-04-09T01:05:40.8475237Z -- Looking for ccache/sccache
+Build for Windows	Build the mod	2026-04-09T01:05:40.8475631Z -- Looking for ccache/sccache - detecting variant
+Build for Windows	Build the mod	2026-04-09T01:05:40.8476065Z -- Looking for ccache/sccache - detected sccache
+Build for Windows	Build the mod	2026-04-09T01:05:40.8476584Z Using sccache with Clang, PCH will be enabled.
+Build for Windows	Build the mod	2026-04-09T01:05:40.8476885Z -- Pre-compiled headers - ON
+Build for Windows	Build the mod	2026-04-09T01:05:40.8629551Z -- Found Geode CLI: D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/my-epic-geode-cli/geode.exe (version 3.7.4)
+Build for Windows	Build the mod	2026-04-09T01:05:40.8662051Z -- Found Git: C:/Program Files/Git/mingw64/bin/git.exe (found version "2.53.0.windows.2")
+Build for Windows	Build the mod	2026-04-09T01:05:40.9094424Z -- CPM: Adding package result@1.4.1 (v1.4.1 at D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/result/1b9c)
+Build for Windows	Build the mod	2026-04-09T01:05:40.9572796Z -- CPM: Adding package json@3.3.0 (v3.3.0 at D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/json/75ca)
+Build for Windows	Build the mod	2026-04-09T01:05:41.2683539Z -- CPM: Adding package nontype_functional@6 (6d1d08c at D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/nontype_functional/aaa0)
+Build for Windows	Build the mod	2026-04-09T01:05:41.3619496Z -- {fmt} version: 12.1.0
+Build for Windows	Build the mod	2026-04-09T01:05:41.3619908Z -- Build type: Release
+Build for Windows	Build the mod	2026-04-09T01:05:41.3709145Z -- Performing Test HAS_NULLPTR_WARNING
+Build for Windows	Build the mod	2026-04-09T01:05:43.1887171Z -- Performing Test HAS_NULLPTR_WARNING - Success
+Build for Windows	Build the mod	2026-04-09T01:05:43.1901518Z -- CPM: Adding package fmt@12.1.0 (12.1.0 at D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226)
+Build for Windows	Build the mod	2026-04-09T01:05:43.2469377Z -- CPM: Adding package asp2@51 (51d3773 at D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/asp2/4dd3)
+Build for Windows	Build the mod	2026-04-09T01:05:43.2988762Z -- Arc features: time
+Build for Windows	Build the mod	2026-04-09T01:05:43.3001232Z -- CPM: Adding package arc@1.5.5 (v1.5.5 at D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/arc/70cb)
+Build for Windows	Build the mod	2026-04-09T01:05:43.3567738Z -- CPM: Adding package TulipHook@3.1.11 (v3.1.11 at D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/tuliphook/37c6)
+Build for Windows	Build the mod	2026-04-09T01:05:43.3580163Z -- Performing Test SUPPORTS_W_NO_EVERYTHING
+Build for Windows	Build the mod	2026-04-09T01:05:43.6405509Z -- Performing Test SUPPORTS_W_NO_EVERYTHING - Success
+Build for Windows	Build the mod	2026-04-09T01:05:43.6422667Z -- Downloading Codegen
+Build for Windows	Build the mod	2026-04-09T01:05:43.6423180Z Set SKIP_BUILDING_CODEGEN to OFF to force codegen to build locally.
+Build for Windows	Build the mod	2026-04-09T01:05:43.8548369Z -- Downloading Codegen - success
+Build for Windows	Build the mod	2026-04-09T01:05:43.8548861Z -- Skipping building Codegen
+Build for Windows	Build the mod	2026-04-09T01:05:43.8549107Z -- Running Codegen
+Build for Windows	Build the mod	2026-04-09T01:05:43.8550046Z './Codegen' 'Win64' 'D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/_deps/bindings-src/bindings/2.2081' 'D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/bindings/bindings'
+Build for Windows	Build the mod	2026-04-09T01:05:44.9325663Z -- Setting up DeviousEditorClassicRemastered
+Build for Windows	Build the mod	2026-04-09T01:05:44.9396254Z -- Mod bishop.devious_editor_classic_remastered is compiling for Geode version 5.5.3
+Build for Windows	Build the mod	2026-04-09T01:05:44.9396984Z -- Mod bishop.devious_editor_classic_remastered is compiling for Geometry Dash version 2.2081
+Build for Windows	Build the mod	2026-04-09T01:05:44.9565611Z -- Skipping installing DeviousEditorClassicRemastered
+Build for Windows	Build the mod	2026-04-09T01:05:44.9572742Z -- Configuring done (25.3s)
+Build for Windows	Build the mod	2026-04-09T01:05:45.3101573Z CMake Warning:
+Build for Windows	Build the mod	2026-04-09T01:05:45.3102122Z   Manually-specified variables were not used by the project:
+Build for Windows	Build the mod	2026-04-09T01:05:45.3102543Z 
+Build for Windows	Build the mod	2026-04-09T01:05:45.3102677Z     CMAKE_POLICY_VERSION_MINIMUM
+Build for Windows	Build the mod	2026-04-09T01:05:45.3102982Z 
+Build for Windows	Build the mod	2026-04-09T01:05:45.3102989Z 
+Build for Windows	Build the mod	2026-04-09T01:05:45.3103130Z -- Generating done (0.3s)
+Build for Windows	Build the mod	2026-04-09T01:05:45.3115018Z -- Build files have been written to: D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build
+Build for Windows	Build the mod	2026-04-09T01:05:45.3693861Z [0/2] Re-checking globbed directories...
+Build for Windows	Build the mod	2026-04-09T01:05:49.7048781Z [1/34] Building CXX object _deps/fmt-build/CMakeFiles/fmt.dir/src/format.cc.obj
+Build for Windows	Build the mod	2026-04-09T01:05:49.7049892Z In file included from D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/src/format.cc:8:
+Build for Windows	Build the mod	2026-04-09T01:05:49.7051270Z In file included from D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/include\fmt/format-inl.h:23:
+Build for Windows	Build the mod	2026-04-09T01:05:49.7052517Z In file included from D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/include\fmt\format.h:41:
+Build for Windows	Build the mod	2026-04-09T01:05:49.7054052Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/include\fmt\base.h:930:5: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+Build for Windows	Build the mod	2026-04-09T01:05:49.7055305Z   930 |     isalpha('x', loc);
+Build for Windows	Build the mod	2026-04-09T01:05:49.7055661Z       |     ^~~~~~~ ~~~~~~~~
+Build for Windows	Build the mod	2026-04-09T01:05:49.7062521Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/src/format.cc:13:30: note: in instantiation of function template specialization 'fmt::locale_ref::locale_ref<std::locale, 0>' requested here
+Build for Windows	Build the mod	2026-04-09T01:05:49.7064443Z    13 | template FMT_API locale_ref::locale_ref(const std::locale& loc);  // DEPRECATED!
+Build for Windows	Build the mod	2026-04-09T01:05:49.7065127Z       |                              ^
+Build for Windows	Build the mod	2026-04-09T01:05:49.7065527Z 1 warning generated.
+Build for Windows	Build the mod	2026-04-09T01:05:50.5504057Z [2/34] Building CXX object _deps/fmt-build/CMakeFiles/fmt.dir/src/os.cc.obj
+Build for Windows	Build the mod	2026-04-09T01:05:50.5981341Z [3/34] Building CXX object _deps/arc-build/CMakeFiles/arc.dir/Unity/unity_0_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:51.2980649Z [4/34] Building CXX object _deps/asp2-build/CMakeFiles/asp.dir/Unity/unity_0_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:51.4938335Z [5/34] Linking CXX static library _deps\fmt-build\fmt.lib
+Build for Windows	Build the mod	2026-04-09T01:05:51.5606116Z [6/34] Linking CXX static library _deps\asp2-build\asp.lib
+Build for Windows	Build the mod	2026-04-09T01:05:51.6198480Z [7/34] Linking CXX static library _deps\arc-build\arc.lib
+Build for Windows	Build the mod	2026-04-09T01:05:52.4155096Z [8/34] Running Codegen
+Build for Windows	Build the mod	2026-04-09T01:05:53.8508570Z [9/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_14_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:53.9044373Z [10/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_13_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:54.0044144Z [11/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_12_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:55.2043720Z [12/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_11_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:55.3835424Z [13/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_10_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:55.4254535Z [14/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_9_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:56.6593272Z [15/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_8_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:56.8115344Z [16/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_7_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:57.0363669Z [17/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_6_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:58.1320176Z [18/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_5_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:58.1415594Z [19/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_4_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:58.3357481Z [20/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_3_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:59.4631667Z [21/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_1_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:59.4821627Z [22/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_2_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:59.6154771Z [23/34] Building CXX object bindings/CMakeFiles/GeodeBindings.dir/Unity/unity_0_cxx.cxx.obj
+Build for Windows	Build the mod	2026-04-09T01:05:59.9642684Z [24/34] Linking CXX static library bindings\GeodeBindings.lib
+Build for Windows	Build the mod	2026-04-09T01:06:08.3722447Z [25/34] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch.hxx.pch
+Build for Windows	Build the mod	2026-04-09T01:06:09.5405819Z [26/34] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/src/IncomingInvitePopup.cpp.obj
+Build for Windows	Build the mod	2026-04-09T01:06:09.5661610Z [27/34] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/src/UserDiscoveryPopup.cpp.obj
+Build for Windows	Build the mod	2026-04-09T01:06:09.8492978Z [28/34] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/src/NetworkManager.cpp.obj
+Build for Windows	Build the mod	2026-04-09T01:06:09.8494657Z In file included from D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/NetworkManager.cpp:1:
+Build for Windows	Build the mod	2026-04-09T01:06:09.8496511Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src\NetworkManager.hpp:11:9: warning: 'WIN32_LEAN_AND_MEAN' macro redefined [-Wmacro-redefined]
+Build for Windows	Build the mod	2026-04-09T01:06:09.8497878Z    11 | #define WIN32_LEAN_AND_MEAN
+Build for Windows	Build the mod	2026-04-09T01:06:09.8498415Z       |         ^
+Build for Windows	Build the mod	2026-04-09T01:06:09.8498955Z <command line>:11:9: note: previous definition is here
+Build for Windows	Build the mod	2026-04-09T01:06:09.8499588Z    11 | #define WIN32_LEAN_AND_MEAN 1
+Build for Windows	Build the mod	2026-04-09T01:06:09.8500122Z       |         ^
+Build for Windows	Build the mod	2026-04-09T01:06:09.8500551Z 1 warning generated.
+Build for Windows	Build the mod	2026-04-09T01:06:10.4741781Z [29/34] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/geode-sdk-clone/entry.cpp.obj
+Build for Windows	Build the mod	2026-04-09T01:06:12.2055132Z [30/34] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.obj
+Build for Windows	Build the mod	2026-04-09T01:06:12.2056543Z FAILED: [code=1] CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.obj 
+Build for Windows	Build the mod	2026-04-09T01:06:12.2074960Z C:\Users\runneradmin\.cargo\bin\sccache C:\PROGRA~1\LLVM\bin\CLANG_~1.EXE -DARC_FEATURE_TIME=1 -DCURRENT_OS_WINDOWS -DDeviousEditorClassicRemastered_EXPORTS -DGEODE_COMP_GD_VERSION=22081 -DGEODE_GD_VERSION=2.2081 -DGEODE_GD_VERSION_STRING=\"2.2081\" -DGEODE_MOD_ID=\"bishop.devious_editor_classic_remastered\" -DMAT_JSON_DYNAMIC=1 -DNOMINMAX -DPROJECT_NAME=DeviousEditorClassicRemastered -DWIN32_LEAN_AND_MEAN -D_HAS_ITERATOR_DEBUGGING=0 -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/cocos/include -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/cocos/extensions -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/fmod -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/bindings/bindings -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/_deps/bindings-src/bindings/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/tuliphook/37c6/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/result/1b9c/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/json/75ca/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/nontype_functional/aaa0/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/asp2/4dd3/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/arc/70cb/include -O3 -DNDEBUG -std=gnu++23 -D_DLL -D_MT -Xclang --dependent-lib=msvcrt -flto=thin --target=x86_64-pc-windows-msvc -Werror=return-type -Xclang -include-pch -Xclang D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch.hxx.pch -Xclang -include -Xclang D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch.hxx -MD -MT CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.obj -MF CMakeFiles\DeviousEditorClassicRemastered.dir\src\CollaborationSession.cpp.obj.d -o CMakeFiles/DeviousEditorClassicRemastered.dir/src/CollaborationSession.cpp.obj -c D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp
+Build for Windows	Build the mod	2026-04-09T01:06:12.2094028Z In file included from D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:2:
+Build for Windows	Build the mod	2026-04-09T01:06:12.2095875Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src\NetworkManager.hpp:11:9: warning: 'WIN32_LEAN_AND_MEAN' macro redefined [-Wmacro-redefined]
+Build for Windows	Build the mod	2026-04-09T01:06:12.2097074Z    11 | #define WIN32_LEAN_AND_MEAN
+Build for Windows	Build the mod	2026-04-09T01:06:12.2097432Z       |         ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.2097817Z <command line>:11:9: note: previous definition is here
+Build for Windows	Build the mod	2026-04-09T01:06:12.2098280Z    11 | #define WIN32_LEAN_AND_MEAN 1
+Build for Windows	Build the mod	2026-04-09T01:06:12.2098669Z       |         ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.2099783Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:246:24: error: no member named 'm_startBG' in 'LevelSettingsObject'
+Build for Windows	Build the mod	2026-04-09T01:06:12.2101080Z   246 |     s.bg         = ls->m_startBG;
+Build for Windows	Build the mod	2026-04-09T01:06:12.2101461Z       |                    ~~  ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.2102955Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:247:24: error: no member named 'm_startGround' in 'LevelSettingsObject'
+Build for Windows	Build the mod	2026-04-09T01:06:12.2104231Z   247 |     s.ground     = ls->m_startGround;
+Build for Windows	Build the mod	2026-04-09T01:06:12.2104641Z       |                    ~~  ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.2105831Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:260:9: error: no member named 'm_startBG' in 'LevelSettingsObject'
+Build for Windows	Build the mod	2026-04-09T01:06:12.2108328Z   260 |     ls->m_startBG       = s.bg;
+Build for Windows	Build the mod	2026-04-09T01:06:12.2108728Z       |     ~~  ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.2109794Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:261:9: error: no member named 'm_startGround' in 'LevelSettingsObject'
+Build for Windows	Build the mod	2026-04-09T01:06:12.2111271Z   261 |     ls->m_startGround   = s.ground;
+Build for Windows	Build the mod	2026-04-09T01:06:12.2111671Z       |     ~~  ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.2112653Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/CollaborationSession.cpp:263:39: error: unknown type name 'PlayerMode'
+Build for Windows	Build the mod	2026-04-09T01:06:12.2113865Z   263 |     ls->m_startMode     = static_cast<PlayerMode>(s.gameMode);
+Build for Windows	Build the mod	2026-04-09T01:06:12.2114406Z       |                                       ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.2114833Z 1 warning and 5 errors generated.
+Build for Windows	Build the mod	2026-04-09T01:06:12.9127302Z [31/34] Building CXX object CMakeFiles/DeviousEditorClassicRemastered.dir/src/main.cpp.obj
+Build for Windows	Build the mod	2026-04-09T01:06:12.9128165Z FAILED: [code=1] CMakeFiles/DeviousEditorClassicRemastered.dir/src/main.cpp.obj 
+Build for Windows	Build the mod	2026-04-09T01:06:12.9137766Z C:\Users\runneradmin\.cargo\bin\sccache C:\PROGRA~1\LLVM\bin\CLANG_~1.EXE -DARC_FEATURE_TIME=1 -DCURRENT_OS_WINDOWS -DDeviousEditorClassicRemastered_EXPORTS -DGEODE_COMP_GD_VERSION=22081 -DGEODE_GD_VERSION=2.2081 -DGEODE_GD_VERSION_STRING=\"2.2081\" -DGEODE_MOD_ID=\"bishop.devious_editor_classic_remastered\" -DMAT_JSON_DYNAMIC=1 -DNOMINMAX -DPROJECT_NAME=DeviousEditorClassicRemastered -DWIN32_LEAN_AND_MEAN -D_HAS_ITERATOR_DEBUGGING=0 -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/cocos/include -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/cocos/extensions -ID:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/geode-sdk-clone/loader/include/Geode/fmod -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/bindings/bindings -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/_deps/bindings-src/bindings/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/fmt/6226/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/tuliphook/37c6/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/result/1b9c/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/json/75ca/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/nontype_functional/aaa0/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/asp2/4dd3/include -isystem D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/cpm-cache/arc/70cb/include -O3 -DNDEBUG -std=gnu++23 -D_DLL -D_MT -Xclang --dependent-lib=msvcrt -flto=thin --target=x86_64-pc-windows-msvc -Werror=return-type -Xclang -include-pch -Xclang D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch.hxx.pch -Xclang -include -Xclang D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/build/CMakeFiles/DeviousEditorClassicRemastered.dir/cmake_pch.hxx -MD -MT CMakeFiles/DeviousEditorClassicRemastered.dir/src/main.cpp.obj -MF CMakeFiles\DeviousEditorClassicRemastered.dir\src\main.cpp.obj.d -o CMakeFiles/DeviousEditorClassicRemastered.dir/src/main.cpp.obj -c D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/main.cpp
+Build for Windows	Build the mod	2026-04-09T01:06:12.9153682Z In file included from D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/main.cpp:5:
+Build for Windows	Build the mod	2026-04-09T01:06:12.9155596Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src\NetworkManager.hpp:11:9: warning: 'WIN32_LEAN_AND_MEAN' macro redefined [-Wmacro-redefined]
+Build for Windows	Build the mod	2026-04-09T01:06:12.9156630Z    11 | #define WIN32_LEAN_AND_MEAN
+Build for Windows	Build the mod	2026-04-09T01:06:12.9156979Z       |         ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.9157570Z <command line>:11:9: note: previous definition is here
+Build for Windows	Build the mod	2026-04-09T01:06:12.9158032Z    11 | #define WIN32_LEAN_AND_MEAN 1
+Build for Windows	Build the mod	2026-04-09T01:06:12.9158396Z       |         ^
+Build for Windows	Build the mod	2026-04-09T01:06:12.9159312Z D:/a/Devious-Editor-classic-Remastered/Devious-Editor-classic-Remastered/src/main.cpp:62:27: error: no type named 'addObject' in 'LevelEditorLayer'
+Build for Windows	Build the mod	2026-04-09T01:06:12.9160369Z    62 |         LevelEditorLayer::addObject(obj);
+Build for Windows	Build the mod	2026-04-09T01:06:12.9160777Z       |         ~~~~~~~~~~~~~~~~~~^
+Build for Windows	Build the mod	2026-04-09T01:06:12.9161121Z 1 warning and 1 error generated.
+Build for Windows	Build the mod	2026-04-09T01:06:12.9161491Z ninja: build stopped: subcommand failed.
+Build for Windows	Build the mod	2026-04-09T01:06:12.9250519Z ##[error]Process completed with exit code 1.
