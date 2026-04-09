@@ -369,25 +369,13 @@ void CollaborationSession::handleTcpMessage(const std::string& data, LevelEditor
         s.twoPlayer  = msg["twoPlayer"].asBool().unwrapOr(false);
         applyLevelSettings(s, edl);
 
-        // 2. Clear existing objects from guest's editor
-        {
-            // Collect first so we don't mutate while iterating
-            std::vector<GameObject*> toRemove;
-            auto* children = edl->m_objectLayer->getChildren();
-            if (children) {
-                for (auto* obj : CCArrayExt<GameObject*>(children)) {
-                    if (obj && (obj->getTag() < CURSOR_BASE_TAG || obj->getTag() >= CURSOR_BASE_TAG + 10))
-                        toRemove.push_back(obj);
-                }
-            }
-            m_applyingRemoteChange = true;
-            for (auto* obj : toRemove) {
-                m_objectToUid.erase(obj);
-                edl->removeObject(obj, true);
-            }
-            m_applyingRemoteChange = false;
-            m_uidToObject.clear();
-        }
+        // 2. Clear existing objects from guest's editor (native way is safer)
+        m_applyingRemoteChange = true;
+        edl->removeAllObjects();
+        m_applyingRemoteChange = false;
+
+        m_uidToObject.clear();
+        m_objectToUid.clear();
 
         // 3. Create host's objects
         std::string objects = msg["objects"].asString().unwrapOr("");
@@ -488,9 +476,11 @@ void CollaborationSession::applyObjectDelete(const std::string& uid, LevelEditor
     m_objectToUid.erase(obj);
     m_uidToObject.erase(it);
 
-    m_applyingRemoteChange = true;
-    edl->removeObject(obj, true); // removeObject(obj, undo) is the correct GD 2.2 API
-    m_applyingRemoteChange = false;
+    if (obj && obj->getParent() == edl->m_objectLayer) {
+        m_applyingRemoteChange = true;
+        edl->removeObject(obj, true);
+        m_applyingRemoteChange = false;
+    }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
