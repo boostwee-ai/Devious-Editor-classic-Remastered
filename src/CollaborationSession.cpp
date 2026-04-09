@@ -12,6 +12,8 @@ CollaborationSession& CollaborationSession::get() {
 }
 
 void CollaborationSession::init() {
+    if (m_initialized) return;
+    m_initialized = true;
     NetworkManager::get().init();
     NetworkManager::get().onUdpMessage = [this](const std::string& ip, const std::string& msg) {
         this->handleUdpMessage(ip, msg);
@@ -25,7 +27,14 @@ bool CollaborationSession::isCollabEnabled() const {
 void CollaborationSession::onEnterEditor() {
     m_inEditor = true;
     m_discoveryTimer = 0.f;
-    m_localUsername = GJAccountManager::get()->m_username;
+    // Guard: GJAccountManager may not be ready on Windows if called too early
+    auto* acctMgr = GJAccountManager::get();
+    if (acctMgr) {
+        m_localUsername = acctMgr->m_username;
+    }
+    if (m_localUsername.empty()) {
+        m_localUsername = "Unknown";
+    }
     if (isCollabEnabled()) {
         NetworkManager::get().startUdpDiscovery(54321); // Default discovery port
     }

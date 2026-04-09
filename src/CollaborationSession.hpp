@@ -35,6 +35,7 @@ private:
     // Callbacks
     void handleUdpMessage(const std::string& ip, const std::string& message);
     
+    bool m_initialized = false;
     bool m_inEditor = false;
     float m_discoveryTimer = 0.f;
     std::string m_localUsername;
