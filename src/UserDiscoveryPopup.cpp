@@ -190,7 +190,14 @@ void UserDiscoveryPopup::updateList() {
 }
 
 void UserDiscoveryPopup::onRefresh(cocos2d::CCObject*) {
-    updateList();
+    // Fire an immediate broadcast so peers respond before we repopulate the list
+    CollaborationSession::get().forceBroadcastNow();
+    // Small delay lets the broadcast + response travel the LAN before redraw
+    this->runAction(CCSequence::create(
+        CCDelayTime::create(0.3f),
+        CCCallFunc::create(this, callfunc_selector(UserDiscoveryPopup::updateList)),
+        nullptr
+    ));
 }
 
 void UserDiscoveryPopup::onInvite(cocos2d::CCObject* sender) {
@@ -224,9 +231,9 @@ void UserDiscoveryPopup::keyBackClicked() {
 void UserDiscoveryPopup::show() {
     auto scene = CCDirector::sharedDirector()->getRunningScene();
     if (!scene) return;
-    // retain() before adding so autorelease() doesn't delete us prematurely.
-    // The scene's addChild gives us an owning reference, so this is safe.
     this->retain();
     scene->addChild(this, 100);
     this->release();
+    // Immediately announce our presence so the other side picks us up fast
+    CollaborationSession::get().forceBroadcastNow();
 }

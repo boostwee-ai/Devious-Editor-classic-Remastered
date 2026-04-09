@@ -50,6 +50,18 @@ std::vector<DiscoveredUser> CollaborationSession::getDiscoveredUsers() {
     return m_discoveredUsers;
 }
 
+void CollaborationSession::forceBroadcastNow() {
+    if (!m_inEditor || !isCollabEnabled()) return;
+    
+    matjson::Value payload = matjson::Value::object();
+    payload["type"]     = static_cast<int>(Packets::MessageType::DiscoveryRequest);
+    payload["platform"] = static_cast<int>(Packets::getCurrentPlatform());
+    payload["user"]     = m_localUsername;
+
+    NetworkManager::get().sendUdpBroadcast(payload.dump(matjson::NO_INDENTATION), 54321);
+    m_discoveryTimer = 0.f; // reset the periodic timer
+}
+
 void CollaborationSession::update(float dt) {
     if (!m_inEditor || !isCollabEnabled()) return;
 

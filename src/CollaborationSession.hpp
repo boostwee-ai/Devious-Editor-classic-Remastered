@@ -27,6 +27,10 @@ public:
 
     bool isCollabEnabled() const;
     
+    // Force an immediate broadcast without waiting for the 2s update tick.
+    // Call this when the discovery popup is first opened.
+    void forceBroadcastNow();
+
     std::vector<DiscoveredUser> getDiscoveredUsers();
 
 private:
